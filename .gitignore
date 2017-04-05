@@ -7,18 +7,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-DungeonCrawler/
-+ build/
-+ dist/
-+ nbproject/
-  build-impl.xml
-  + private/
-  + project.properties
-  + project.xml
-+ src/
-+ test/
-+ build.xml
-
 # Java Specific #
 *.class
 
