@@ -11,6 +11,6 @@ package main;
  */
 public class main {
     public static void main(String[] args) {
-        System.out.println("Test");
+        System.out.println("Welcome to the Dungeon");
     }
 }
