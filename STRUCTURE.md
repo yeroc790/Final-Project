@@ -40,6 +40,16 @@
 <h2>Armor</h2>
 <p>Extends Item, affects players defence, not sure how I want to set that up</p>
 
+<h2>Chest</h2>
+<p>Extends BoardObject, contents are decided when the chest is opened</p>
+<p><strong>Instance Variables:</strong><br>
+  An array of type Item<br>
+  A boolean that determines if it has been opened or not, maybe
+</p>
+<p><strong>Methods:</strong><br>
+  openChest() - this triggers an RNG thing that populates the array of items
+</p>
+
 <h2>Menu</h2>
 <p>The main navigation, there will be child classes for each different menu that is needed in the game</p>
 <p>There needs to be an inventory menu</p>
