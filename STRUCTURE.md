@@ -60,6 +60,7 @@
 
 <h2>Enemy</h2>
 <p>Extends Character, base class for all monsters</p>
+<p>There needs to be a tier system, so that in the game setup text file, you can type a number 1-5, and it will spawn a random enemy from that tier</p>
 <p><strong>Instance Variables:</strong><br>
   Name<br>
 </p>
