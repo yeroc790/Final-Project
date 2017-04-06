@@ -77,3 +77,20 @@
 <p><strong>Methods:</strong><br>
   Not sure<br>
 </p>
+
+<hr>
+
+<h2>Game resource file</h2>
+<p>This is stored as a text file that contains symbols, which the loadGame() method in class Map uses to populate the map</p>
+<p><strong>Symbols:</strong><p>
+<ul>
+<li>" " - empty space</li>
+<li>"|" - a wall</li>
+<li>"P" - the player</li>
+<li>"1" - Tier 1 enemy</li>
+<li>"2" - Tier 2 enemy</li>
+<li>"3" - Tier 3 enemy</li>
+<li>"4" - Tier 4 enemy</li>
+<li>"5" - Tier 5 enemy</li>
+<li>"C" - Chest</li>
+<li>"D" - Door</li>
