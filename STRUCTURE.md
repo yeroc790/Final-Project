@@ -8,7 +8,8 @@
 <p><strong>Methods:</strong><br>
   Various positioning and movement related things<br>
   displayMap() which displays the current map on the console<br>
-  Basic accessors and mutators
+  Basic accessors and mutators<br>
+  A method that reads in from a text file and sets up a map
 </p>
 
 <h2>BoardObject</h2>
