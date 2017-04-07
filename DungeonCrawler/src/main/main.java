@@ -1,9 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Notes: World creates an object of type player, everything is run through the map object, or the map.player object
  */
 package main;
+import objects.*;
+import menus.*;
 
 /**
  *
@@ -11,6 +11,14 @@ package main;
  */
 public class main {
     public static void main(String[] args) {
-        System.out.println("Welcome to the Dungeon");
+        
+        
+        menus.MainMenu.run();
+        
+//        world.movePlayer('u');
+//        world.movePlayer('u');
+//        System.out.println("-- Move Player Up --");
+//        world.displayMap();
+//        world.displayPlayerMap();
     }
 }
