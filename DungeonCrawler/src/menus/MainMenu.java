@@ -49,7 +49,7 @@ public class MainMenu {
                     break;
             }
             
-            world.displayPlayerMap();
+//            world.displayPlayerMap();
         }
     }
 }

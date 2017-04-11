@@ -5,10 +5,13 @@
  */
 package objects;
 
+import objects.monsters.Monster;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
+import menus.ChestMenu;
+import menus.MonsterMenu;
 
 /**
  *
@@ -96,7 +99,9 @@ public class World {
                     map[x-1][y] = player;
                     map[x][y] = new BoardObject(x, y);
                     player.setX(x-1);
+                    displayPlayerMap();
                 }else{
+                    displayPlayerMap();
                     interact(x-1,y);
                 }
                 break;
@@ -106,7 +111,9 @@ public class World {
                     map[x+1][y] = player;
                     map[x][y] = new BoardObject(x, y);
                     player.setX(x+1);
+                    displayPlayerMap();
                 }else{
+                    displayPlayerMap();
                     interact(x+1,y);
                 }
                 break;
@@ -116,7 +123,9 @@ public class World {
                     map[x][y-1] = player;
                     map[x][y] = new BoardObject(x, y);
                     player.setY(y-1);
+                    displayPlayerMap();
                 }else{
+                    displayPlayerMap();
                     interact(x,y-1);
                 }
                 break;
@@ -126,7 +135,9 @@ public class World {
                     map[x][y+1] = player;
                     map[x][y] = new BoardObject(x, y);
                     player.setY(y+1);
+                    displayPlayerMap();
                 }else{
+                    displayPlayerMap();
                     interact(x,y+1);
                 }
                 break;
@@ -188,16 +199,14 @@ public class World {
     public void interact(int x, int y){
         switch(map[x][y].getDisplay()){
             case '|':
-                System.out.println("There is a wall blocking your path");
+                System.out.println("\n -- There is a wall blocking your path --\n");
                 break;
             case 'C':
-                System.out.println("That is a chest");
-                //would you like to open it?
-                ((Chest)map[x][y]).displayContents();
-//                ((Chest)map[x][y]).takeItem(1); //fix these
-//                System.out.println("You took " + ((Chest)map[x][y]).getItem(1).getName());
-//                ((Chest)map[x][y]).displayContents();
+                ChestMenu.run(map[x][y]);
                 break;
+            case '1':
+                Monster test = new Monster();
+                MonsterMenu.run(test);
         }
     }
     /* -- End Movement Methods -- */

@@ -11,20 +11,31 @@ package objects;
  */
 public class Item {
     private String name;
+    private String desc; //description
     
     public Item(){
         name = "default_name";
+        desc = "default_desc";
     }
     
-    public Item(String name){
+    public Item(String name, String desc){
         this.name = name;
+        this.desc = desc;
     }
     
     public String getName(){
         return name;
     }
     
+    public String getDesc(){
+        return desc;
+    }
+    
     public void setName(String name){
         this.name = name;
+    }
+    
+    public void setDesc(String desc){
+        this.desc = desc;
     }
 }

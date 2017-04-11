@@ -17,9 +17,9 @@ public class Chest extends BoardObject{
         super(0, 0, 'C', "chest");
         //put random number
         contents = new Item[3];
-        contents[0] = new Item("Mjolnir");
-        contents[1] = new Item("Sting");
-        contents[2] = new Item("Banana");
+        contents[0] = new Item("Mjolnir", "Attack +3");
+        contents[1] = new Item("Sting", "Attack +2");
+        contents[2] = new Item("Banana", "Restore 1 health");
         empty = false;
     }
     
@@ -27,9 +27,9 @@ public class Chest extends BoardObject{
         super(x, y, 'C', "chest");
         //put random number
         contents = new Item[3];
-        contents[0] = new Item("Mjolnir");
-        contents[1] = new Item("Sting");
-        contents[2] = new Item("Banana");
+        contents[0] = new Item("Mjolnir", "Attack +3");
+        contents[1] = new Item("Sting", "Attack +2");
+        contents[2] = new Item("Banana", "Restore 1 health");
         empty = false;
     }
     
@@ -56,6 +56,7 @@ public class Chest extends BoardObject{
     }
     
     public void displayContents(){
+        System.out.println("-- Chest Contents --");
         for(Item temp : contents){
             System.out.println(temp.getName());
         }
