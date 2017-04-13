@@ -8,10 +8,14 @@ package objects;
 import objects.monsters.Monster;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import menus.ChestMenu;
 import menus.MonsterMenu;
+import objects.monsters.tier1.Tier1;
 
 /**
  *
@@ -205,8 +209,19 @@ public class World {
                 ChestMenu.run(map[x][y]);
                 break;
             case '1':
-                Monster test = new Monster();
-                MonsterMenu.run(test);
+                //needs to only run the first time
+                if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){
+                    Tier1 randMonster = (Tier1)Tier1.getRandomMonster(); //creating the monster
+                    map[x][y] = randMonster;
+                }
+                //map[x][y] is now of type Tier1
+                Tier1 randMonster = (Tier1)map[x][y];
+                randMonster.setX(x);
+                randMonster.setY(y);
+//                randMonster.setDisplay('1');
+                System.out.println("RandMonster.display: '" + randMonster.getDisplay() + "'");
+                MonsterMenu.run(randMonster); //running the menu
+                break;
         }
     }
     /* -- End Movement Methods -- */

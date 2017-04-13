@@ -12,5 +12,7 @@ import objects.Character;
  * @author hansenc
  */
 public class Monster extends Character{
-
+    public Monster(int row, int col, char display, String name){
+        super(row, col, display, name);
+    }
 }

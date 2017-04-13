@@ -10,7 +10,11 @@ package objects.monsters.tier1;
  * @author hansenc
  */
 public class Goblin extends Tier1{
+    public Goblin(int row, int col) {
+        super(row, col, "Goblin");
+    }
+    
     public Goblin(){
-        //foo
+        super(0,0,"Goblin");
     }
 }

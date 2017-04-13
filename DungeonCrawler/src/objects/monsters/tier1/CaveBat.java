@@ -12,7 +12,11 @@ import objects.monsters.tier1.Tier1;
  * @author hansenc
  */
 public class CaveBat extends Tier1{
+    public CaveBat(int row, int col) {
+        super(row, col, "Cave Bat");
+    }
+    
     public CaveBat(){
-        //foo
+        super(0,0,"Cave Bat");
     }
 }

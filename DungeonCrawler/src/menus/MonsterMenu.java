@@ -5,6 +5,9 @@
  */
 package menus;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objects.monsters.Monster;
 import objects.monsters.tier1.Tier1;
 
@@ -13,7 +16,8 @@ import objects.monsters.tier1.Tier1;
  * @author hansenc
  */
 public class MonsterMenu {
-    public static void run(Monster monster){
-        Tier1.getRandomMonster();
+    public static void run(Tier1 monster){
+        System.out.println("\n-- There is a " + monster.getName() + " blocking your path! --");
+        monster.doFoo();
     }
 }

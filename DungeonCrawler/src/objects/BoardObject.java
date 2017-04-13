@@ -12,7 +12,7 @@ package objects;
 public class BoardObject {
     protected int x;
     protected int y;
-    private final char display; //what the map displays
+    private char display; //what the map displays
     private char displayCopy; //because the player map changes things
     private String name;
     
@@ -21,6 +21,7 @@ public class BoardObject {
         x = 0;
         y = 0;
         display = ' ';
+        name = "";
         displayCopy = display;
     }
     
@@ -28,6 +29,7 @@ public class BoardObject {
         this.x = x;
         this.y = y;
         this.display = display;
+        this.name = name;
         displayCopy = this.display;
     }
     
@@ -35,6 +37,7 @@ public class BoardObject {
         this.x = x;
         this.y = y;
         display = ' ';
+        name = "";
         displayCopy = display;
     }
     /* -- End Constructors -- */
@@ -68,6 +71,10 @@ public class BoardObject {
     
     public void setY(int y){
         this.y = y;
+    }
+    
+    public void setDisplay(char display){
+        this.display = display;
     }
     
     public void setDisplayCopy(char display){
