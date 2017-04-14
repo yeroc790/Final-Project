@@ -13,8 +13,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import menus.ChestMenu;
-import menus.MonsterMenu;
+import menus.*;
 import objects.monsters.tier1.Tier1;
 import resources.Clear;
 
@@ -48,7 +47,17 @@ public class World {
     public BoardObject[][] getMap(){
         return Arrays.copyOf(map, map.length);
     }
+    
+    public Player getPlayer(){
+        return player;
+    }
     /* -- End Accessors -- */
+    
+    /* -- Begin Mutators -- */
+    public void setMap(BoardObject[][] map){
+        this.map = Arrays.copyOf(map, map.length);
+    }
+    /* -- End Mutators -- */
     
     /* -- Begin Setup Methods -- */
     public void loadGame(String filepath){
@@ -80,6 +89,8 @@ public class World {
                     map[row][col] = new Chest(row, col);
                 }else if(objectChar=='|'){
                     map[row][col] = new Wall(row, col);
+                }else if(objectChar==' '){
+                    map[row][col] = new Floor(row, col);
                 }else{
                     map[row][col] = new BoardObject(row, col, file[row].charAt(col), "default_name");
                 }
@@ -208,7 +219,6 @@ public class World {
     }
     
     public void interact(int x, int y){
-        
         switch(map[x][y].getDisplay()){
             case '|':
                 System.out.println("\n -- There is a wall blocking your path --\n");
@@ -219,17 +229,13 @@ public class World {
                 break;
             case '1':
                 //needs to only run the first time
-                if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){
-                    Tier1 randMonster = (Tier1)Tier1.getRandomMonster(); //creating the monster
+                if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){ //if the object is not a specified monster
+                    Tier1 randMonster = (Tier1)Tier1.getRandomMonster(x,y); //creating the monster
                     map[x][y] = randMonster;
                 }
                 //map[x][y] is now of type Tier1
                 Tier1 randMonster = (Tier1)map[x][y];
-                randMonster.setX(x);
-                randMonster.setY(y);
-//                randMonster.setDisplay('1');
-                System.out.println("RandMonster.display: '" + randMonster.getDisplay() + "'");
-                MonsterMenu.run(randMonster); //running the menu
+                MonsterMenu.run(randMonster, getPlayer()); //running the menu
                 break;
         }
     }

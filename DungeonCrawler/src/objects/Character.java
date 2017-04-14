@@ -10,11 +10,39 @@ package objects;
  * @author Corey
  */
 public class Character extends BoardObject{
+    private int attack;
+    private double defense;
+    private int health;
+    
     public Character(){
         
     }
     
     public Character(int row, int col, char display, String name){
         super(row, col, display, name);
+    }
+    
+    public void setAttack(int attack){
+        this.attack = attack;
+    }
+    
+    public void setDefense(double defense){
+        this.defense = defense;
+    }
+    
+    public void setHealth(int health){
+        this.health = health;
+    }
+    
+    public int getAttack(){
+        return attack;
+    }
+    
+    public double getDefense(){
+        return defense;
+    }
+    
+    public int getHealth(){
+        return health;
     }
 }

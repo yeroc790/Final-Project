@@ -23,7 +23,7 @@ public class Tier1 extends Monster{
         super(0,0,'1',"Test");
     }
     
-    public static Object getRandomMonster(){
+    public static Object getRandomMonster(int x, int y){
         String path = "objects.monsters.tier1.";
         String monsterNames[] = {path+"Goblin", path+"CaveBat"};
         Random r = new Random();
@@ -35,34 +35,23 @@ public class Tier1 extends Monster{
     //    Constructor<?> cons = c.getConstructor(String.class);
     //    Object object = cons.newInstance("MyAttributeValue");
         try{
-//            Class<?> c = Class.forName(monsterNames[rand]);
-//            Constructor<?> cons = c.getConstructor();
-//            Object object = cons.newInstance();
             Tier1 object = (Tier1)Class.forName(monsterNames[rand]).newInstance(); //running through the Tier1 constructor, not the Goblin or CaveBat constructors
+            object.setX(x);
+            object.setY(y);
             return object;
         }catch(ClassNotFoundException e){
             System.out.println("Error: " + e.getMessage());
             System.exit(0);
-//        }catch(NoSuchMethodException e){
-//            System.out.println("Error: " + e.getMessage());
-//            System.exit(0);
         }catch(InstantiationException e){
             System.out.println("Error: " + e.getMessage());
             System.exit(0);
         }catch(IllegalAccessException e){
             System.out.println("Error: " + e.getMessage());
             System.exit(0);
-//        }catch(InvocationTargetException e){
-//            System.out.println("Error: " + e.getMessage());
-//            System.exit(0);
         }
         
         //too keep compiler happy
         Object foo = new Object();
         return foo;
-    }
-    
-    public void doFoo(){
-        System.out.println("Foo");
     }
 }

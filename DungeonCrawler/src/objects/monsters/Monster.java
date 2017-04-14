@@ -5,6 +5,7 @@
  */
 package objects.monsters;
 
+import objects.BoardObject;
 import objects.Character;
 
 /**
@@ -14,5 +15,9 @@ import objects.Character;
 public class Monster extends Character{
     public Monster(int row, int col, char display, String name){
         super(row, col, display, name);
+    }
+    
+    public void die(){
+        menus.MainMenu.removeObject(getX(), getY());
     }
 }

@@ -11,14 +11,6 @@ import menus.*;
  */
 public class main {
     public static void main(String[] args) {
-        
-        
         menus.MainMenu.run();
-        
-//        world.movePlayer('u');
-//        world.movePlayer('u');
-//        System.out.println("-- Move Player Up --");
-//        world.displayMap();
-//        world.displayPlayerMap();
     }
 }

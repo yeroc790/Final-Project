@@ -11,6 +11,8 @@ import resources.Clear;
  * @author Corey
  */
 public class MainMenu {
+    private static World world = new World();
+    
     public static void run(){
         boolean quit = false;
         Scanner input = new Scanner(System.in);
@@ -19,7 +21,7 @@ public class MainMenu {
         
         Clear.clrScreen();
         System.out.println("Welcome to the Dungeon\n");
-        World world = new World();
+        
 
         System.out.println("-- Current Map --");
         world.displayMap();
@@ -55,7 +57,12 @@ public class MainMenu {
                         break;
                 }
             }
-//            world.displayPlayerMap();
         }
+    }
+    
+    public static void removeObject(int x, int y){
+        BoardObject[][] map = world.getMap();
+        map[x][y] = new Floor(x, y);
+        world.setMap(map);
     }
 }
