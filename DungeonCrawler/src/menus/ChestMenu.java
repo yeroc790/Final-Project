@@ -8,6 +8,7 @@ package menus;
 import java.util.Scanner;
 import objects.BoardObject;
 import objects.Chest;
+import resources.Clear;
 
 /**
  *
@@ -30,6 +31,7 @@ public class ChestMenu {
         answer = input.next().toLowerCase().charAt(0);
         
         if(answer=='y'){
+            Clear.clrScreen();
             otherChest.displayContents();
         }
     }

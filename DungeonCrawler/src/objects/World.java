@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import menus.ChestMenu;
 import menus.MonsterMenu;
 import objects.monsters.tier1.Tier1;
+import resources.Clear;
 
 /**
  *
@@ -96,6 +97,8 @@ public class World {
     public void movePlayer(char dir ){
         int x = player.getX();
         int y = player.getY();
+        
+        Clear.clrScreen();
         switch(dir){
             case 'u':
                 explore(x-1,y);
@@ -105,8 +108,9 @@ public class World {
                     player.setX(x-1);
                     displayPlayerMap();
                 }else{
-                    displayPlayerMap();
+                    Clear.clrScreen();
                     interact(x-1,y);
+                    displayPlayerMap();
                 }
                 break;
             case 'd':
@@ -117,8 +121,9 @@ public class World {
                     player.setX(x+1);
                     displayPlayerMap();
                 }else{
-                    displayPlayerMap();
+                    Clear.clrScreen();
                     interact(x+1,y);
+                    displayPlayerMap();
                 }
                 break;
             case 'l':
@@ -129,8 +134,9 @@ public class World {
                     player.setY(y-1);
                     displayPlayerMap();
                 }else{
-                    displayPlayerMap();
+                    Clear.clrScreen();
                     interact(x,y-1);
+                    displayPlayerMap();
                 }
                 break;
             case 'r':
@@ -141,8 +147,9 @@ public class World {
                     player.setY(y+1);
                     displayPlayerMap();
                 }else{
-                    displayPlayerMap();
+                    Clear.clrScreen();
                     interact(x,y+1);
+                    displayPlayerMap();
                 }
                 break;
             default:
@@ -201,11 +208,13 @@ public class World {
     }
     
     public void interact(int x, int y){
+        
         switch(map[x][y].getDisplay()){
             case '|':
                 System.out.println("\n -- There is a wall blocking your path --\n");
                 break;
             case 'C':
+                displayPlayerMap();
                 ChestMenu.run(map[x][y]);
                 break;
             case '1':

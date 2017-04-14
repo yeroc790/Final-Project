@@ -3,16 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/Character.java</file>
             <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/menus/ChestMenu.java</file>
             <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/Chest.java</file>
             <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/World.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/monsters/tier1/Goblin.java</file>
             <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/monsters/Monster.java</file>
+            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/monsters/tier1/Tier1.java</file>
+            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/BoardObject.java</file>
+            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/monsters/tier1/Goblin.java</file>
             <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/menus/MainMenu.java</file>
             <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/Item.java</file>
             <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/monsters/tier1/CaveBat.java</file>
+            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/resources/Clear.java</file>
             <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/menus/MonsterMenu.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/monsters/tier1/Tier1.java</file>
         </group>
     </open-files>
 </project-private>
