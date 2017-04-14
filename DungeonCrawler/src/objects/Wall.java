@@ -11,10 +11,10 @@ package objects;
  */
 public class Wall extends BoardObject{
     public Wall(){
-        super(0, 0, '|', "wall");
+        super(0, 0, '#', "wall");
     }
     
     public Wall(int x, int y){
-        super(x, y, '|', "wall");
+        super(x, y, '#', "wall");
     }
 }

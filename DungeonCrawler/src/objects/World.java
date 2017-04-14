@@ -87,7 +87,7 @@ public class World {
                     map[row][col] = player;
                 }else if(objectChar=='C'){
                     map[row][col] = new Chest(row, col);
-                }else if(objectChar=='|'){
+                }else if(objectChar=='#'){
                     map[row][col] = new Wall(row, col);
                 }else if(objectChar==' '){
                     map[row][col] = new Floor(row, col);
@@ -95,7 +95,7 @@ public class World {
                     map[row][col] = new BoardObject(row, col, file[row].charAt(col), "default_name");
                 }
                 if(objectChar!='P')
-                    map[row][col].setDisplayCopy('_');
+                    map[row][col].setDisplayCopy('*');
                 
                 map[row][col].setX(row);
                 map[row][col].setY(col);
@@ -220,7 +220,7 @@ public class World {
     
     public void interact(int x, int y){
         switch(map[x][y].getDisplay()){
-            case '|':
+            case '#':
                 System.out.println("\n -- There is a wall blocking your path --\n");
                 break;
             case 'C':
