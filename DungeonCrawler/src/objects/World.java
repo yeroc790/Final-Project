@@ -5,14 +5,10 @@
  */
 package objects;
 
-import objects.monsters.Monster;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import menus.*;
 import objects.monsters.tier1.Tier1;
 import resources.Clear;
@@ -32,6 +28,12 @@ public class World {
         size = 10;
         map = new BoardObject[size][size];
         loadGame(DEFAULT_GAME);
+    }
+    
+    public World(String file){
+        size = 10;
+        map = new BoardObject[size][size];
+        loadGame(file);
     }
     /* -- End Constructors -- */
     

@@ -2,8 +2,15 @@
  * Main menu: controls movement, possibly open inventory
  */
 package menus;
+import exceptions.DuplicateItemException;
+import exceptions.InventoryFullException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objects.*;
+import objects.items.armor.Rags;
+import objects.items.utility.LesserHealing;
+import objects.items.weapons.WoodenSword;
 import resources.Clear;
 
 /**
@@ -13,11 +20,14 @@ import resources.Clear;
 public class MainMenu {
     private static World world = new World();
     
-    public static void run(){
+    public static void run(String file){
         boolean quit = false;
         Scanner input = new Scanner(System.in);
         String answer;
         char answerChar;
+        
+        if(file!= "" && file!= null)
+            world = new World(file);
         
         Clear.clrScreen();
         System.out.println("Welcome to the Dungeon\n");
@@ -31,7 +41,7 @@ public class MainMenu {
         world.displayPlayerMap();
         
         while(quit==false){
-            System.out.println("Move with WASD, type 0 to quit");
+            System.out.println("Move with WASD, press I for inventory, type 0 to quit");
             answer = input.nextLine();
             if(answer.length()>0){
                 answerChar = answer.charAt(0);
@@ -48,6 +58,10 @@ public class MainMenu {
                         break;
                     case 'd':
                         world.movePlayer('r');
+                        break;
+                    case 'i':
+                        menus.InventoryMenu.run(world.getPlayer());
+                        world.displayPlayerMap();
                         break;
                     case '0':
                         quit = true;

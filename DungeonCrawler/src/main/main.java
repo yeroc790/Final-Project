@@ -11,6 +11,6 @@ import menus.*;
  */
 public class main {
     public static void main(String[] args) {
-        menus.MainMenu.run();
+        menus.MainMenu.run("src\\resources\\objectTest.txt");
     }
 }

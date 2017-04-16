@@ -5,6 +5,7 @@
  */
 package menus;
 
+import java.util.Random;
 import java.util.Scanner;
 import objects.Player;
 import objects.monsters.tier1.Tier1;
@@ -46,28 +47,89 @@ public class MonsterMenu {
     }
     
     private static boolean attack(Tier1 monster, Player player){ //returns true if monster is dead
-        int mAttack = monster.getAttack(), pAttack = player.getAttack();
-        int mHealth = monster.getHealth(), pHealth = player.getHealth();
+        Random r = new Random();
+        final int CRIT_CHANCE = 30;
+        String name = monster.getName();
+
+        /* -- Player Stats in first slot, monster in second -- */
+        int[] attack = {player.getAttack(), monster.getAttack()};
+        int[] health = {player.getHealth(), monster.getHealth()};
+        int[] roll = {r.nextInt(CRIT_CHANCE), r.nextInt(CRIT_CHANCE)};
+        boolean[] crit = {false, false};
         
-        mHealth -= pAttack;
-        pHealth -= mAttack;
+        /* -- Simulated roll for attack values -- */
+        for (int i = 0; i < 2; i++) {
+            if(roll[i]==0){ //miss
+                attack[i] = 0;}
+            else if(roll[i]==CRIT_CHANCE-1){ //crit
+                attack[i] = attack[i]*2;
+                crit[i] = true;
+            }else{
+                attack[i] = rngAttack(attack[i]);
+            }
+        }
         
-        if(mHealth<=0){
-            System.out.println("\n-- You killed the " + monster.getName() + " --");
-            System.out.println("Player health: " + player.getHealth());
-            monster.die();
-            return true;
-        }else if(pHealth<0){
-            System.out.println("-- You died, game over --");
+        health[1] -= attack[0]; //player attacks
+        health[0] -= attack[1]; //monster attacks
+        
+        //player display
+        if(attack[0]==0)
+            System.out.println("\n-- You attacked the " + name + " and missed --");
+        else if(crit[0]==true)
+            System.out.println("\n-- You landed a critical hit on the " + name + " for " + attack[0] + " damage! --");
+        else
+            System.out.println("\n-- You attacked the " + name + " for " + attack[0] + " damage --");
+        
+        //monster display
+        if(attack[1]==0)
+            System.out.println("-- The " + name + " attacked you, but you dodged the attack --");
+        else if(crit[1]==true)
+            System.out.println("-- The " + name + " landed a critical hit on you for " + attack[1] + " damage --");
+        else
+            System.out.println("-- The " + monster.getName() + " attacked you for " + attack[1] + " damage --");
+        
+        //player died
+        if(health[0]<0){
+            System.out.println("\n-- You died, game over --");
             System.exit(0);
         }
         
-        System.out.println("\n-- You attacked the " + monster.getName() + " for " + pAttack + " damage --");
-        System.out.println("-- The " + monster.getName() + " attacked you for " + mAttack + " damage --");
+        //monster died
+        if(health[1]<=0){
+            System.out.println("\n-- You killed the " + name + " --");
+            System.out.println("Player health: " + health[0]);
+            player.setHealth(health[0]);
+            monster.die();
+            return true;
+        }
         
-        monster.setHealth(mHealth);
-        player.setHealth(pHealth);
+        monster.setHealth(health[1]);
+        player.setHealth(health[0]);
         return false;
+    }
+    
+    private static int rngAttack(int attack){
+        Random r = new Random();
+        int high, low;
+
+        //tossing out nonpositive attacks
+        if(attack<=0)
+            return 0;
+        
+        //to avoid highs and lows of 0
+        if(attack<=3){
+            high = attack;
+            low = 1;
+        }else{
+            high = (int)(attack + attack*0.25); //range of 25% higher and 25% lower than standard attack
+            low = (int)(attack - attack*0.25);
+        }
+        
+        int rand = r.nextInt(high-low) + low;
+        if(rand<0)
+            rand = 0;
+        
+        return rand;
     }
     
     private static int subMenu(){

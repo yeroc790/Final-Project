@@ -5,6 +5,8 @@
  */
 package objects;
 
+import objects.items.Item;
+
 /**
  *
  * @author Corey
