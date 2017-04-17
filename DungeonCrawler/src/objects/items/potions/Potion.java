@@ -16,17 +16,12 @@ public class Potion extends Item{
     private int health;
     
     public Potion(){
-        super("potion", "consumable item", "drink 'em to get health");
+        super("potion", "consumable item", "drink 'em to get health", "common");
         this.health = 0;
     }
     
-    public Potion(String name, String stat, String desc, int health){
-        super(name, stat, desc);
-        this.health = health;
-    }
-    
-    public Potion(String name, String stat, String desc, int health, boolean equipped){
-        super(name, stat, desc, equipped);
+    public Potion(String name, String stat, String desc, String rarity, int health){
+        super(name, stat, desc, rarity);
         this.health = health;
     }
     

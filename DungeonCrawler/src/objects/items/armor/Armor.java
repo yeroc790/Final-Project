@@ -14,22 +14,22 @@ import objects.items.Item;
 public class Armor extends Item{
     private int defense;
     public Armor(){
-        super("armor", "affects defense", "armor is a thing that you wear");
+        super("armor", "affects defense", "armor is a thing that you wear", "common");
         defense = 0;
     }
     
-    public Armor(String name, String stat, String desc){
-        super(name, stat, desc);
+    public Armor(String name, String stat, String desc, String rarity){
+        super(name, stat, desc, rarity);
         defense = 0;
     }
     
-    public Armor(String name, String stat, String desc, int defense){
-        super(name, stat, desc);
+    public Armor(String name, String stat, String desc, String rarity, int defense){
+        super(name, stat, desc, rarity);
         this.defense = defense;
     }
     
-    public Armor(String name, String stat, String desc, int defense, boolean equipped){
-        super(name, stat, desc, equipped);
+    public Armor(String name, String stat, String desc, String rarity, int defense, boolean equipped){
+        super(name, stat, desc, rarity, equipped);
         this.defense = defense;
     }
     

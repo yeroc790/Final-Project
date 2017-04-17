@@ -15,22 +15,22 @@ public class Weapon extends Item{
     private int attack;
     
     public Weapon(){
-        super("weapon", "affects attack", "weapons are things you use to hit monsters with");
+        super("weapon", "affects attack", "weapons are things you use to hit monsters with", "common");
         attack = 0;
     }
     
-    public Weapon(String name, String stat, String desc){
-        super(name, stat, desc);
+    public Weapon(String name, String stat, String desc, String rarity){
+        super(name, stat, desc, rarity);
         attack = 0;
     }
     
-    public Weapon(String name, String stat, String desc, int attack){
-        super(name, stat, desc);
+    public Weapon(String name, String stat, String desc, String rarity, int attack){
+        super(name, stat, desc, rarity);
         this.attack = attack;
     }
     
-    public Weapon(String name, String stat, String desc, int attack, boolean equipped){
-        super(name, stat, desc, equipped);
+    public Weapon(String name, String stat, String desc, String rarity, int attack, boolean equipped){
+        super(name, stat, desc, rarity, equipped);
         this.attack = attack;
     }
     

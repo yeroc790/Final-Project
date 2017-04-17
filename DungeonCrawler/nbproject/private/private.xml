@@ -3,16 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/Wall.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/monsters/tier1/Tier1.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/monsters/Monster.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/items/potions/LesserHealing.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/monsters/tier1/CaveBat.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/menus/InventoryMenu.java</file>
             <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/main/main.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/items/armor/Rags.java</file>
             <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/Character.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/monsters/tier1/Goblin.java</file>
             <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/Player.java</file>
             <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/menus/MainMenu.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/items/Item.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/items/potions/Potion.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/items/weapons/WoodenSword.java</file>
             <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/Chest.java</file>
-            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/resources/map1.txt</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/items/armor/Armor.java</file>
             <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/World.java</file>
-            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/BoardObject.java</file>
-            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/Item.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/objects/items/weapons/Weapon.java</file>
+            <file>file:/E:/Projects/Final-Project/DungeonCrawler/src/menus/MonsterMenu.java</file>
         </group>
     </open-files>
 </project-private>

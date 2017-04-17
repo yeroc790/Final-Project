@@ -227,7 +227,7 @@ public class World {
                 break;
             case 'C':
                 displayPlayerMap();
-                ChestMenu.run(map[x][y]);
+                ChestMenu.run(map[x][y], player);
                 break;
             case '1':
                 //needs to only run the first time

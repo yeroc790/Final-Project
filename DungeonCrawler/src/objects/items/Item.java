@@ -13,12 +13,14 @@ public class Item {
     private String name;
     private String stat;
     private String desc; //description
+    private String rarity; //common, rare, epic, legendary
     private boolean equipped;
     
     public Item(){
         name = "default_name";
         stat = "default_stat";
         desc = "default_desc";
+        rarity = "common";
         equipped = false;
     }
     
@@ -36,18 +38,24 @@ public class Item {
         stat = "";
     }
     
-    public Item(String name, String stat, String desc){
+    public Item(String name, String stat, String desc, String rarity){
         this.name = name;
         this.stat = stat;
         this.desc = desc;
+        this.rarity = rarity;
         equipped = false;
     }
     
-    public Item(String name, String stat, String desc, boolean equipped){
+    public Item(String name, String stat, String desc, String rarity, boolean equipped){
         this.name = name;
         this.stat = stat;
         this.desc = desc;
+        this.rarity = rarity;
         this.equipped = equipped;
+    }
+    
+    public String getRarity(){
+        return rarity;
     }
     
     public String getName(){
