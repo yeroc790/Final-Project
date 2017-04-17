@@ -11,7 +11,7 @@ package objects;
  */
 public class Character extends BoardObject{
     private int attack;
-    private double defense;
+    private int defense;
     private int health;
     
     public Character(){
@@ -26,7 +26,7 @@ public class Character extends BoardObject{
         this.attack = attack;
     }
     
-    public void setDefense(double defense){
+    public void setDefense(int defense){
         this.defense = defense;
     }
     
@@ -38,7 +38,7 @@ public class Character extends BoardObject{
         return attack;
     }
     
-    public double getDefense(){
+    public int getDefense(){
         return defense;
     }
     

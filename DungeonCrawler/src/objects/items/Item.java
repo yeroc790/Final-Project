@@ -11,11 +11,13 @@ package objects.items;
  */
 public class Item {
     private String name;
+    private String stat;
     private String desc; //description
     private boolean equipped;
     
     public Item(){
         name = "default_name";
+        stat = "default_stat";
         desc = "default_desc";
         equipped = false;
     }
@@ -24,10 +26,26 @@ public class Item {
         this.name = name;
         this.desc = desc;
         equipped = false;
+        stat = "";
     }
     
     public Item(String name, String desc, boolean equipped){
         this.name = name;
+        this.desc = desc;
+        this.equipped = equipped;
+        stat = "";
+    }
+    
+    public Item(String name, String stat, String desc){
+        this.name = name;
+        this.stat = stat;
+        this.desc = desc;
+        equipped = false;
+    }
+    
+    public Item(String name, String stat, String desc, boolean equipped){
+        this.name = name;
+        this.stat = stat;
         this.desc = desc;
         this.equipped = equipped;
     }
@@ -38,6 +56,14 @@ public class Item {
     
     public String getDesc(){
         return desc;
+    }
+    
+    public String getStat(){
+        return stat;
+    }
+    
+    public boolean isEquipped(){
+        return equipped;
     }
     
     public void setEquip(boolean b){

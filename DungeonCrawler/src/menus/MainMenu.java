@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import objects.*;
 import objects.items.armor.Rags;
-import objects.items.utility.LesserHealing;
+import objects.items.potions.LesserHealing;
 import objects.items.weapons.WoodenSword;
 import resources.Clear;
 
@@ -41,8 +41,8 @@ public class MainMenu {
         world.displayPlayerMap();
         
         while(quit==false){
-            System.out.println("Move with WASD, press I for inventory, type 0 to quit");
-            answer = input.nextLine();
+            System.out.println("Move with WASD, type I for inventory, type 0 to quit");
+            answer = input.nextLine().toLowerCase();
             if(answer.length()>0){
                 answerChar = answer.charAt(0);
                 

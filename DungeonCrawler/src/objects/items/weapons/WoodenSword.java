@@ -10,11 +10,15 @@ package objects.items.weapons;
  * @author Corey
  */
 public class WoodenSword extends Weapon{
+    private static final String name = "Wooden Sword";
+    private static final String stat = "Attack +2";
+    private static final String desc = "It looks like it's seen better days";
+    
     public WoodenSword(){
-        super("Wooden Sword", "Attack +2");
+        super(name, stat, desc,2);
     }
     
     public WoodenSword(boolean equipped){
-        super("Wooden Sword", "Attack +2", equipped);
+        super(name, stat, desc, 2, equipped);
     }
 }

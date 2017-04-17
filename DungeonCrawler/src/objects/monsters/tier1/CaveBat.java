@@ -13,7 +13,7 @@ import objects.monsters.tier1.Tier1;
  */
 public class CaveBat extends Tier1{
     private final int ATTACK = 3;
-    private final double DEFENSE = 0;
+    private final int DEFENSE = 0;
     private final int HEALTH = 15;
     
     public CaveBat(int row, int col) {

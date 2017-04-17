@@ -11,7 +11,7 @@ package objects.monsters.tier1;
  */
 public class Goblin extends Tier1{
     private final int ATTACK = 10;
-    private final double DEFENSE = 0;
+    private final int DEFENSE = 0;
     private final int HEALTH = 20;
     
     public Goblin(int row, int col) {

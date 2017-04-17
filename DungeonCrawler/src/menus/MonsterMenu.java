@@ -52,7 +52,8 @@ public class MonsterMenu {
         String name = monster.getName();
 
         /* -- Player Stats in first slot, monster in second -- */
-        int[] attack = {player.getAttack(), monster.getAttack()};
+        int[] attack = {player.getTotalAttack(), monster.getAttack()};
+        int[] defense = {player.getTotalDefense(), monster.getDefense()};
         int[] health = {player.getHealth(), monster.getHealth()};
         int[] roll = {r.nextInt(CRIT_CHANCE), r.nextInt(CRIT_CHANCE)};
         boolean[] crit = {false, false};
@@ -69,8 +70,25 @@ public class MonsterMenu {
             }
         }
         
-        health[1] -= attack[0]; //player attacks
-        health[0] -= attack[1]; //monster attacks
+        //damage goes through defense shield first
+        defense[1] -= attack[0];
+        if(defense[1]<=0){
+            health[1] -= (defense[1]*(-1));
+            attack[0] = (defense[1]*(-1));
+        }else
+            attack[0] = 0;
+            
+        defense[0] -= attack[1];
+        if(defense[0]<=0){
+            health[0] -= (defense[0]*(-1));
+            attack[1] = (defense[0]*(-1));
+        }else
+            attack[1] = 0;
+        
+//        health[1] = health[1] - (defense[1] - attack[0]);
+        
+//        health[1] -= attack[0]; //player attacks
+//        health[0] -= attack[1]; //monster attacks
         
         //player display
         if(attack[0]==0)

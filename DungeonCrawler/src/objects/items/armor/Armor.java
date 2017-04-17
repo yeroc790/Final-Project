@@ -12,15 +12,28 @@ import objects.items.Item;
  * @author Corey
  */
 public class Armor extends Item{
+    private int defense;
     public Armor(){
-        super("armor", "affects defense");
+        super("armor", "affects defense", "armor is a thing that you wear");
+        defense = 0;
     }
     
-    public Armor(String name, String desc){
-        super(name, desc);
+    public Armor(String name, String stat, String desc){
+        super(name, stat, desc);
+        defense = 0;
     }
     
-    public Armor(String name, String desc, boolean equipped){
-        super(name, desc, equipped);
+    public Armor(String name, String stat, String desc, int defense){
+        super(name, stat, desc);
+        this.defense = defense;
+    }
+    
+    public Armor(String name, String stat, String desc, int defense, boolean equipped){
+        super(name, stat, desc, equipped);
+        this.defense = defense;
+    }
+    
+    public int getDefense(){
+        return defense;
     }
 }
