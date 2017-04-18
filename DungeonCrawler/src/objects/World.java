@@ -12,6 +12,7 @@ import java.util.Scanner;
 import menus.*;
 import objects.monsters.tier1.Tier1;
 import resources.Clear;
+import swing.KeyEventTest;
 
 /**
  *
@@ -22,18 +23,21 @@ public class World {
     private int size; //determines the length and width of the map, probably start at 20 or 50
     private BoardObject[][] map;
     private Player player;
+    private KeyEventTest window;
     
     /* -- Begin Constructors -- */
-    public World(){
+    public World(KeyEventTest window){
         size = 10;
         map = new BoardObject[size][size];
         loadGame(DEFAULT_GAME);
+        this.window = window;
     }
     
-    public World(String file){
+    public World(String file, KeyEventTest window){
         size = 10;
         map = new BoardObject[size][size];
         loadGame(file);
+        this.window = window;
     }
     /* -- End Constructors -- */
     
@@ -107,7 +111,7 @@ public class World {
     /* -- End Setup Methods -- */
     
     /* -- Begin Movement Methods -- */
-    public void movePlayer(char dir ){
+    public void movePlayer(char dir){
         int x = player.getX();
         int y = player.getY();
         
@@ -245,23 +249,53 @@ public class World {
     
     /* -- Begin Display Methods -- */
     public void displayMap(){
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                System.out.print(map[i][j].getDisplay());
-            }
-            System.out.println();
-        }
-        System.out.println();
+//        for (int i = 0; i < size; i++) {
+//            for (int j = 0; j < size; j++) {
+//                System.out.print(map[i][j].getDisplay());
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
+        window.displayText(mapString());
     }
     
     public void displayPlayerMap(){
+//        for (int i = 0; i < size; i++) {
+//            for (int j = 0; j < size; j++) {
+//                System.out.print(map[i][j].getDisplayCopy());
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
+        window.displayText(playerMapString());
+    }
+    
+    public String mapString(){
+        String s = "";
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                System.out.print(map[i][j].getDisplayCopy());
+                s+=(map[i][j].getDisplay());
             }
-            System.out.println();
+            s+="\n";
         }
-        System.out.println();
+        s+="\n";
+        return s;
+    }
+    
+    public String playerMapString(){
+        String s = "";
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                s+=(map[i][j].getDisplayCopy());
+            }
+            s+="\n";
+        }
+        s+="\n";
+        return s;
+    }
+    
+    public void addWindow(KeyEventTest window){
+        this.window = window;
     }
     /* -- End Display Methods -- */
 }
