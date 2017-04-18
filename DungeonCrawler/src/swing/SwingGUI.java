@@ -7,12 +7,15 @@ package swing;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -20,12 +23,14 @@ import javax.swing.JTextField;
  *
  * @author Corey
  */
-public class KeyEventTest   extends JFrame 
+public class SwingGUI   extends JFrame 
                             implements KeyListener,
                                        ActionListener
 {
-    JTextArea displayArea;
+    JTextArea gameArea;
     JTextField typingArea;
+    JTextArea textArea;
+    JLabel titleArea;
     static final String newline = System.getProperty("line.seperator");
     private char lastChar;
     private int menu; //0 MainMenu, 1 MonsterMenu, 2 InventoryMenu, 3 ChestMenu
@@ -52,74 +57,88 @@ public class KeyEventTest   extends JFrame
         JButton button = new JButton("Start Game");
         button.addActionListener(this);
         
+        JPanel topArea = new JPanel();
+        topArea.setLayout(new GridLayout(2,1));
+        
+        
+        titleArea = new JLabel("-- Welcome to the Dungeon --");
+        titleArea.setHorizontalAlignment(JLabel.CENTER);
+        
         typingArea = new JTextField(20);
         typingArea.addKeyListener(this);
         
-        displayArea = new JTextArea();
-        displayArea.setEditable(false);
-        displayArea.setFont(new Font("monospaced", Font.PLAIN, 12));
+        gameArea = new JTextArea();
+        gameArea.setEditable(false);
+        gameArea.setFont(new Font("monospaced", Font.PLAIN, 12));
         
         
-        getContentPane().add(typingArea, BorderLayout.PAGE_START);
-        getContentPane().add(displayArea, BorderLayout.CENTER);
-        getContentPane().add(button, BorderLayout.PAGE_END);
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        
+        
+        topArea.add(titleArea);
+        topArea.add(typingArea);
+        
+        getContentPane().add(topArea, BorderLayout.PAGE_START);
+//        getContentPane().add(typingArea, BorderLayout.PAGE_END);
+//        getContentPane().add(titleArea, BorderLayout.PAGE_START, SwingConstants.CENTER);
+        getContentPane().add(gameArea, BorderLayout.CENTER);
+        getContentPane().add(textArea, BorderLayout.PAGE_END);
     }
     
-    public KeyEventTest(String name){
-        super(name);
+    public SwingGUI(String gameFile){
+        super("Dungeon Crawler");
         createAndShowGUI();
-        startGame();
+        startGame(gameFile);
         menu = 0;
     }
     
     /** Handle the key typed event from the text field. */
     public void keyTyped(KeyEvent e){
-//        displayInfo(e, "KEY TYPED: ");
-//        processInput(e);
         processInput(e);
     }
     
     /** Handle the key pressed event from the text field. */
     public void keyPressed(KeyEvent e){
-//        displayInfo(e, "KEY PRESSED: ");
+
     }
     
     /** Handle the key released event from the text field. */
     public void keyReleased(KeyEvent e){
-//        displayInfo(e, "KEY RELEASED: ");
+        
     }
     
     /** Handle the button click. */
     public void actionPerformed(ActionEvent e){
-        //Clear the text components.
-//        displayArea.setText("");
-//        typingArea.setText("");
         
-        //Return the focus to the typing area.
-//        typingArea.requestFocusInWindow();
     }
     
     public void processInput(KeyEvent e){
-//        char c = e.getKeyChar();
-//        displayArea.setText("You typed '" + c + "'");
         typingArea.setText("");
         typingArea.requestFocusInWindow();
-//        lastChar = c;
 
         switch(menu){ //menu needs to be set to determine where input goes
             case 0:
-                menus.MainMenu.processInput(e, this);
+                menus.MainMenu.guiInput(e, this);
                 break;
         }
         
     }
     
-    private void startGame(){
-        displayArea.setText("Welcome to the Dungeon");
+    private void startGame(String gameFile){
+        menus.MainMenu.runGUI(gameFile, this);
+    }
+    
+    public void displayGame(String text){
+        gameArea.setText(text);
     }
     
     public void displayText(String text){
-        displayArea.setText(text);
+        textArea.setText(text);
+    }
+    
+    public void displayTitle(String text){
+        titleArea.setText(text);
     }
     
     public char nextChar(){

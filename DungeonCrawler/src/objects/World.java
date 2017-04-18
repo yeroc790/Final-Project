@@ -12,7 +12,7 @@ import java.util.Scanner;
 import menus.*;
 import objects.monsters.tier1.Tier1;
 import resources.Clear;
-import swing.KeyEventTest;
+import swing.SwingGUI;
 
 /**
  *
@@ -23,17 +23,29 @@ public class World {
     private int size; //determines the length and width of the map, probably start at 20 or 50
     private BoardObject[][] map;
     private Player player;
-    private KeyEventTest window;
+    private SwingGUI window;
     
     /* -- Begin Constructors -- */
-    public World(KeyEventTest window){
+    public World(){
+        size = 10;
+        map = new BoardObject[size][size];
+        loadGame(DEFAULT_GAME);
+    }
+    
+    public World(String file){
+        size = 10;
+        map = new BoardObject[size][size];
+        loadGame(file);
+    }
+    
+    public World(SwingGUI window){
         size = 10;
         map = new BoardObject[size][size];
         loadGame(DEFAULT_GAME);
         this.window = window;
     }
     
-    public World(String file, KeyEventTest window){
+    public World(String file, SwingGUI window){
         size = 10;
         map = new BoardObject[size][size];
         loadGame(file);
@@ -175,6 +187,66 @@ public class World {
         }
     }
     
+    public void movePlayerGUI(char dir){
+        int x = player.getX();
+        int y = player.getY();
+        
+        Clear.clrScreen();
+        switch(dir){
+            case 'u':
+                explore(x-1,y);
+                if(canMove('u')){
+                    map[x-1][y] = player;
+                    map[x][y] = new BoardObject(x, y);
+                    player.setX(x-1);
+                }else{
+                    Clear.clrScreen();
+                    interact(x-1,y);
+                }
+                playerMapGUI();
+                break;
+            case 'd':
+                explore(x+1,y);
+                if(canMove('d')){
+                    map[x+1][y] = player;
+                    map[x][y] = new BoardObject(x, y);
+                    player.setX(x+1);
+                }else{
+                    Clear.clrScreen();
+                    interact(x+1,y);
+                }
+                playerMapGUI();
+                break;
+            case 'l':
+                explore(x,y-1);
+                if(canMove('l')){
+                    map[x][y-1] = player;
+                    map[x][y] = new BoardObject(x, y);
+                    player.setY(y-1);
+                }else{
+                    Clear.clrScreen();
+                    interact(x,y-1);
+                }
+                playerMapGUI();
+                break;
+            case 'r':
+                explore(x,y+1);
+                if(canMove('r')){
+                    map[x][y+1] = player;
+                    map[x][y] = new BoardObject(x, y);
+                    player.setY(y+1);
+                }else{
+                    Clear.clrScreen();
+                    interact(x,y+1);
+                }
+                playerMapGUI();
+                break;
+            default:
+                System.out.println("Error: Invalid direction");
+                System.exit(0);
+        }
+    }
+    
     public boolean canMove(char dir){
         int x = player.getX();
         int y = player.getY();
@@ -249,25 +321,33 @@ public class World {
     
     /* -- Begin Display Methods -- */
     public void displayMap(){
-//        for (int i = 0; i < size; i++) {
-//            for (int j = 0; j < size; j++) {
-//                System.out.print(map[i][j].getDisplay());
-//            }
-//            System.out.println();
-//        }
-//        System.out.println();
-        window.displayText(mapString());
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                System.out.print(map[i][j].getDisplay());
+            }
+            System.out.println();
+        }
+        System.out.println();
+//        window.displayText(mapString());
+    }
+    
+    public void mapGUI(){
+        window.displayGame(mapString());
     }
     
     public void displayPlayerMap(){
-//        for (int i = 0; i < size; i++) {
-//            for (int j = 0; j < size; j++) {
-//                System.out.print(map[i][j].getDisplayCopy());
-//            }
-//            System.out.println();
-//        }
-//        System.out.println();
-        window.displayText(playerMapString());
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                System.out.print(map[i][j].getDisplayCopy());
+            }
+            System.out.println();
+        }
+        System.out.println();
+//        window.displayText(playerMapString());
+    }
+    
+    public void playerMapGUI(){
+        window.displayGame(playerMapString());
     }
     
     public String mapString(){
@@ -294,7 +374,7 @@ public class World {
         return s;
     }
     
-    public void addWindow(KeyEventTest window){
+    public void addWindow(SwingGUI window){
         this.window = window;
     }
     /* -- End Display Methods -- */

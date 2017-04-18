@@ -7,57 +7,55 @@ import java.awt.event.KeyListener;
 import java.util.Scanner;
 import objects.*;
 import resources.Clear;
-import swing.KeyEventTest;
+import swing.SwingGUI;
 
 /**
  *
  * @author Corey
  */
 public class MainMenu implements KeyListener{
-    private static KeyEventTest window;
-    private static World world = new World(window);
+    private static SwingGUI window;
+    private static World world;
     
-    public static void run(String file, KeyEventTest window){
+    public static void run(String file){ //console version
         boolean quit = false;
         Scanner input = new Scanner(System.in);
         String answer;
         char answerChar;
-        MainMenu.window = window;
         
         if(file!= "" && file!= null)
-            world = new World(file, window);
+            world = new World(file);
+        else
+            world = new World();
         
         Clear.clrScreen();
         System.out.println("Welcome to the Dungeon\n");
-        window.displayText("Welcome to the Dungeon" + 
-                            "\n" +
-                            "-- Map --\n" +
-                            world.playerMapString());
+//        window.displayText("Welcome to the Dungeon" + 
+//                            "\n" +
+//                            "-- Map --\n" +
+//                            world.playerMapString());
+        System.out.println("-------- Map --------");
+        world.displayPlayerMap();
         
         while(quit==false){
             System.out.println("Move with WASD, type I for inventory, type 0 to quit");
             answer = input.next().toLowerCase() + "\n";
-//            robot.keyPress(KeyEvent.VK_ENTER);
-//            robot.keyRelease(KeyEvent.VK_ENTER);
+            
             if(answer.length()>0){
                 answerChar = answer.charAt(0);
                 
                 switch (answerChar){
                     case 'w':
                         world.movePlayer('u');
-                        window.displayText(world.playerMapString());
                         break;
                     case 's':
                         world.movePlayer('d');
-                        world.displayPlayerMap();
                         break;
                     case 'a':
                         world.movePlayer('l');
-                        world.displayPlayerMap();
                         break;
                     case 'd':
                         world.movePlayer('r');
-                        world.displayPlayerMap();
                         break;
                     case 'i':
                         menus.InventoryMenu.run(world.getPlayer());
@@ -65,9 +63,6 @@ public class MainMenu implements KeyListener{
                         break;
                     case '0':
                         quit = true;
-                        break;
-                    case 't':
-                        window.displayText("this is a test");
                         break;
                     default:
                         System.out.println("Invalid input, try again");
@@ -77,23 +72,34 @@ public class MainMenu implements KeyListener{
         }
     }
     
-    public static void processInput(KeyEvent e, KeyEventTest window){
+    public static void runGUI(String file, SwingGUI window){
+        if(file!= "" && file!= null)
+            world = new World(file);
+        else
+            world = new World();
+        
+//        window.displayTitle("<html><div style='text-align:center;'>Welcome to the Dungeon</div></html>");
+        window.displayGame(world.playerMapString());
+        window.displayText("Move around using wasd");
+    }
+    
+    public static void guiInput(KeyEvent e, SwingGUI window){ //gui version
         MainMenu.window = window;
         world.addWindow(window);
         char answerChar = e.getKeyChar();
         
         switch (answerChar){
             case 'w':
-                world.movePlayer('u');
+                world.movePlayerGUI('u');
                 break;
             case 's':
-                world.movePlayer('d');
+                world.movePlayerGUI('d');
                 break;
             case 'a':
-                world.movePlayer('l');
+                world.movePlayerGUI('l');
                 break;
             case 'd':
-                world.movePlayer('r');
+                world.movePlayerGUI('r');
                 break;
             case 'i':
                 menus.InventoryMenu.run(world.getPlayer()); //need to update to menus.InventoryMenu.processInfo(world.getPlayer(), e);
@@ -101,10 +107,10 @@ public class MainMenu implements KeyListener{
             case '0':
                 break;
             case 't':
-                window.displayText("this is a test");
+                window.displayGame("this is a test");
                 break;
             case 'm':
-                window.displayText(world.playerMapString());
+                window.displayGame(world.playerMapString());
                 break;
             default:
                 System.out.println("Invalid input, try again");
