@@ -5,17 +5,14 @@
  */
 package menus;
 
-import java.util.Random;
+import java.awt.event.KeyEvent;
 import java.util.Scanner;
 import objects.BoardObject;
 import objects.Chest;
 import objects.Player;
 import objects.items.Item;
-import objects.items.armor.Armor;
-import objects.items.potions.Potion;
-import objects.items.weapons.Weapon;
-import objects.monsters.tier1.Tier1;
 import resources.Clear;
+import swing.SwingGUI;
 
 /**
  *
@@ -42,6 +39,12 @@ public class ChestMenu {
             Clear.clrScreen();
             subMenu(otherChest, player);
         }
+    }
+    
+    public static void runGUI(BoardObject boardObject, Player player, SwingGUI window, KeyEvent e) {
+        window.displayText("chest menu loaded");
+        if(e.getKeyChar()=='1')
+            window.displayText("hello from chest menu");
     }
     
     private static void subMenu(Chest chest, Player player){

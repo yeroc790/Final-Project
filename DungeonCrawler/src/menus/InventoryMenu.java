@@ -5,16 +5,20 @@
  */
 package menus;
 
+import java.awt.event.KeyEvent;
 import java.util.Scanner;
 import objects.Player;
 import objects.items.Item;
 import resources.Clear;
+import swing.SwingGUI;
 
 /**
  *
  * @author Corey
  */
 public class InventoryMenu {
+    private static Player player;
+    
     public static void run(Player player){
         final int NUM_CHOICES = player.getInventorySize() + 1;
         Item[] inventory = player.getInventory();
@@ -50,8 +54,26 @@ public class InventoryMenu {
         }
     }
     
+    public static void setPlayer(Player player){
+        InventoryMenu.player = player;
+    }
+    
+    public static void guiInput(KeyEvent e, SwingGUI window) {
+        char c = e.getKeyChar();
+        runGUI(player, window);
+        if(c=='1'){
+            window.displayText("You pressed 1, hello there");
+        }
+    }
+    
+    static void runGUI(Player player, SwingGUI window) {
+        window.displayText("inventory menu loaded");
+        
+    }
+    
     public static void displayInventory(Player player){
         Item[] inventory = player.getInventory();
+        
         System.out.println("\n----------------- Your Inventory ------------------");
         for (int i = 0; i < inventory.length; i++) {
             if(inventory[i]==null)
@@ -98,6 +120,11 @@ public class InventoryMenu {
         choices[NUM_CHOICES-1] = "BACK";
         
         do{
+            System.out.println("\n------------------- Your Stats --------------------");
+            System.out.println("                    Health: " + player.getHealth());
+            System.out.println("                    Attack: " + player.getTotalAttack());
+            System.out.println("                    Defense: " + player.getTotalDefense());
+            System.out.println("---------------------------------------------------");
             System.out.println("\n----------------- Your Inventory ------------------");
             for (int i = 0; i < NUM_CHOICES; i++) {
                 System.out.println(header[i] + choices[i]);

@@ -90,19 +90,22 @@ public class MainMenu implements KeyListener{
         
         switch (answerChar){
             case 'w':
-                world.movePlayerGUI('u');
+                world.movePlayerGUI('u', window, e);
                 break;
             case 's':
-                world.movePlayerGUI('d');
+                world.movePlayerGUI('d', window, e);
                 break;
             case 'a':
-                world.movePlayerGUI('l');
+                world.movePlayerGUI('l', window, e);
                 break;
             case 'd':
-                world.movePlayerGUI('r');
+                world.movePlayerGUI('r', window, e);
                 break;
             case 'i':
-                menus.InventoryMenu.run(world.getPlayer()); //need to update to menus.InventoryMenu.processInfo(world.getPlayer(), e);
+                window.setMenu(window.INVENTORY_MENU);
+                menus.InventoryMenu.setPlayer(world.getPlayer());
+//                menus.InventoryMenu.runGUI(world.getPlayer(), window, e);
+//                window.setMenu(window.MAIN_MENU);
                 break;
             case '0':
                 break;

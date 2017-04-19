@@ -36,13 +36,13 @@ public class Potion extends Item{
         
         pHealth += health;
         if(pHealth>player.getMaxHealth()){
-            restored = player.getMaxHealth() - pHealth;
+            restored = (player.getMaxHealth() + health) - pHealth;
             pHealth = player.getMaxHealth();
         }else
             restored = health;
         
         player.setHealth(pHealth);
         player.removeFromInventory(this);
-        System.out.println("-- Restored " + restored + " health");
+        System.out.println("-- Restored " + restored + " health --");
     }
 }

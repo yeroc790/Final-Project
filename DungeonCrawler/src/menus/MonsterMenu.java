@@ -5,11 +5,13 @@
  */
 package menus;
 
+import java.awt.event.KeyEvent;
 import java.util.Random;
 import java.util.Scanner;
 import objects.Player;
 import objects.monsters.tier1.Tier1;
 import resources.Clear;
+import swing.SwingGUI;
 
 /**
  *
@@ -20,6 +22,12 @@ public class MonsterMenu {
         System.out.println("\n-- There is a " + monster.getName() + " blocking your path! --");
        
         encounter(monster,player);
+    }
+    
+    public static void runGUI(Tier1 randMonster, Player player, SwingGUI window, KeyEvent e) {
+        window.displayText("monster menu loaded");
+        if(e.getKeyChar()=='1')
+            window.displayText("hello from monster menu");
     }
     
     public static void encounter(Tier1 monster, Player player){

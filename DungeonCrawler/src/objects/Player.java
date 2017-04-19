@@ -121,11 +121,13 @@ public class Player extends Character{
     
     public int getTotalAttack(){
         for (int i = 0; i < inventory.length; i++) {
-            if(inventory[i].isEquipped()){
-                if(inventory[i] instanceof objects.items.weapons.Weapon){
-                    //item is an equipped weapon
-                    Weapon w = (Weapon) inventory[i];
-                    return (getAttack() + w.getAttack());
+            if(inventory[i]!=null){
+                if(inventory[i].isEquipped()){
+                    if(inventory[i] instanceof objects.items.weapons.Weapon){
+                        //item is an equipped weapon
+                        Weapon w = (Weapon) inventory[i];
+                        return (getAttack() + w.getAttack());
+                    }
                 }
             }
         }

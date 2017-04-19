@@ -5,6 +5,7 @@
  */
 package objects;
 
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -187,11 +188,10 @@ public class World {
         }
     }
     
-    public void movePlayerGUI(char dir){
+    public void movePlayerGUI(char dir, SwingGUI window, KeyEvent e){
         int x = player.getX();
         int y = player.getY();
         
-        Clear.clrScreen();
         switch(dir){
             case 'u':
                 explore(x-1,y);
@@ -200,8 +200,7 @@ public class World {
                     map[x][y] = new BoardObject(x, y);
                     player.setX(x-1);
                 }else{
-                    Clear.clrScreen();
-                    interact(x-1,y);
+                    interactGUI(x-1,y, window, e);
                 }
                 playerMapGUI();
                 break;
@@ -212,8 +211,7 @@ public class World {
                     map[x][y] = new BoardObject(x, y);
                     player.setX(x+1);
                 }else{
-                    Clear.clrScreen();
-                    interact(x+1,y);
+                    interactGUI(x+1,y,window, e);
                 }
                 playerMapGUI();
                 break;
@@ -224,8 +222,7 @@ public class World {
                     map[x][y] = new BoardObject(x, y);
                     player.setY(y-1);
                 }else{
-                    Clear.clrScreen();
-                    interact(x,y-1);
+                    interactGUI(x,y-1,window, e);
                 }
                 playerMapGUI();
                 break;
@@ -236,8 +233,7 @@ public class World {
                     map[x][y] = new BoardObject(x, y);
                     player.setY(y+1);
                 }else{
-                    Clear.clrScreen();
-                    interact(x,y+1);
+                    interactGUI(x,y+1,window, e);
                 }
                 playerMapGUI();
                 break;
@@ -314,6 +310,32 @@ public class World {
                 //map[x][y] is now of type Tier1
                 Tier1 randMonster = (Tier1)map[x][y];
                 MonsterMenu.run(randMonster, getPlayer()); //running the menu
+                break;
+        }
+    }
+    
+    public void interactGUI(int x, int y, SwingGUI window, KeyEvent e){
+        switch(map[x][y].getDisplay()){
+            case '#':
+                window.displayText("\n -- There is a wall blocking your path --\n");
+                break;
+            case 'C':
+                window.displayGame(playerMapString());
+                window.setMenu(window.CHEST_MENU);
+                ChestMenu.runGUI(map[x][y], player, window, e);
+                window.setMenu(window.MAIN_MENU);
+                break;
+            case '1':
+                //needs to only run the first time
+                if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){ //if the object is not a specified monster
+                    Tier1 randMonster = (Tier1)Tier1.getRandomMonster(x,y); //creating the monster
+                    map[x][y] = randMonster;
+                }
+                //map[x][y] is now of type Tier1
+                Tier1 randMonster = (Tier1)map[x][y];
+                window.setMenu(window.CHEST_MENU);
+                MonsterMenu.runGUI(randMonster, getPlayer(), window, e); //running the menu
+                window.setMenu(window.MAIN_MENU);
                 break;
         }
     }
