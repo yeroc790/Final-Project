@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package objects.items.weapons;
+package objects.items.armor;
 
 /**
  *
  * @author hansenc
  */
-public class IronSword extends Weapon{
-    private static final String name = "Iron Sword";
-    private static final String stat = "Attack +2";
-    private static final String desc = "It's shiny";
+public class IronArmor extends Armor{
+    private static final String name = "Iron Armor";
+    private static final String stat = "Defense +2";
+    private static final String desc = "Does this make me look fat?";
     private static final String rarity = "common";
     
-    public IronSword(){
+    public IronArmor(){
         super(name, stat, desc, rarity, 2);
     }
     
-    public IronSword(boolean equipped){
+    public IronArmor(boolean equipped){
         super(name, stat, desc, rarity, 2, equipped);
     }
 }

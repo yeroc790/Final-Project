@@ -11,15 +11,15 @@ package objects.items.armor;
  */
 public class CopperArmor extends Armor{
     private static final String name = "Copper Armor";
-    private static final String stat = "Defense +3";
+    private static final String stat = "Defense +1";
     private static final String desc = "You feel like the tin man, but with copper";
     private static final String rarity = "rare";
     
     public CopperArmor(){
-        super(name, stat, desc, rarity, 3);
+        super(name, stat, desc, rarity, 1);
     }
     
     public CopperArmor(boolean equipped){
-        super(name, stat, desc, rarity, 3, equipped);
+        super(name, stat, desc, rarity, 1, equipped);
     }
 }
