@@ -87,7 +87,9 @@ public class MainMenu implements KeyListener{
         MainMenu.window = window;
         world.addWindow(window);
         char answerChar = e.getKeyChar();
+        window.setPlayer(world.getPlayer());
         
+        window.displayText("");
         switch (answerChar){
             case 'w':
                 world.movePlayerGUI('u', window, e);
@@ -103,9 +105,7 @@ public class MainMenu implements KeyListener{
                 break;
             case 'i':
                 window.setMenu(window.INVENTORY_MENU);
-                menus.InventoryMenu.setPlayer(world.getPlayer());
-//                menus.InventoryMenu.runGUI(world.getPlayer(), window, e);
-//                window.setMenu(window.MAIN_MENU);
+                menus.InventoryMenu.guiInput(e, window, world.getPlayer());
                 break;
             case '0':
                 break;

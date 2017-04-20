@@ -44,6 +44,7 @@ public class SwingGUI   extends JFrame
     private char lastChar;
     private int menu; //0 MainMenu, 1 MonsterMenu, 2 InventoryMenu, 3 ChestMenu
     public static final int MAIN_MENU = 0, MONSTER_MENU = 1, INVENTORY_MENU = 2, CHEST_MENU = 3;
+    private Player player; //for inventory menu
     
     /**
      * Create the GUI and show it. For thread safety,
@@ -134,6 +135,28 @@ public class SwingGUI   extends JFrame
         getContentPane().add(textArea, BorderLayout.PAGE_END);
     }
     
+    public void alignTextLeft(){
+        SimpleAttributeSet bSet = new SimpleAttributeSet();
+        StyleConstants.setAlignment(bSet, StyleConstants.ALIGN_LEFT);
+        StyleConstants.setFontFamily(bSet, "lucida typewriter");
+        StyleConstants.setFontSize(bSet, 18);
+        
+        StyledDocument textDoc = textArea.getStyledDocument();
+        textDoc.setCharacterAttributes(105, textDoc.getLength()-105, bSet, false);
+        textDoc.setParagraphAttributes(0, 104, bSet, false);
+    }
+    
+    public void alignTextCenter(){
+        SimpleAttributeSet bSet = new SimpleAttributeSet();
+        StyleConstants.setAlignment(bSet, StyleConstants.ALIGN_CENTER);
+        StyleConstants.setFontFamily(bSet, "lucida typewriter");
+        StyleConstants.setFontSize(bSet, 18);
+        
+        StyledDocument textDoc = textArea.getStyledDocument();
+        textDoc.setCharacterAttributes(105, textDoc.getLength()-105, bSet, false);
+        textDoc.setParagraphAttributes(0, 104, bSet, false);
+    }
+    
     public SwingGUI(String gameFile){
         super("Dungeon Crawler");
         createAndShowGUI();
@@ -143,12 +166,12 @@ public class SwingGUI   extends JFrame
     
     /** Handle the key typed event from the text field. */
     public void keyTyped(KeyEvent e){
-        processInput(e);
+        
     }
     
     /** Handle the key pressed event from the text field. */
     public void keyPressed(KeyEvent e){
-
+        processInput(e);
     }
     
     /** Handle the key released event from the text field. */
@@ -165,20 +188,23 @@ public class SwingGUI   extends JFrame
         typingArea.setText("");
         typingArea.requestFocusInWindow();
         
-        if(e.getKeyChar()=='0'){
+        if(e.getKeyChar()=='`'){
             System.exit(0);
         }else if(e.getKeyChar()=='8'){
             displayText("menu currently selected: " + menu);
+            return;
         }else if(e.getKeyChar()=='9'){
             getFrameSize();
+            return;
         }
         switch(menu){ //menu needs to be set to determine where input goes
             case MAIN_MENU:
+                displayText("Loading main menu");
                 menus.MainMenu.guiInput(e, this);
                 break;
             case INVENTORY_MENU:
-                menus.InventoryMenu.guiInput(e, this);
-                setMenu(MAIN_MENU);
+                displayText("Loading main menu");
+                menus.InventoryMenu.guiInput(e, this, player);
                 break;
         }
         
@@ -217,5 +243,9 @@ public class SwingGUI   extends JFrame
         int h = r.height;
         int w = r.width;
         displayText("height: " + h + ", width: " + w);
+    }
+    
+    public void setPlayer(Player otherPlayer){
+        player = otherPlayer;
     }
 }

@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/items/potions/Potion.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/menus/ChestMenu.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/swing/SwingGUI.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/menus/InventoryMenu.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/World.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/objects/Player.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/menus/MainMenu.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/main/main.java</file>
-            <file>file://fs/Users/hansenc/Documents/Final-Project/DungeonCrawler/src/menus/MonsterMenu.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
