@@ -41,12 +41,6 @@ public class ChestMenu {
         }
     }
     
-    public static void runGUI(BoardObject boardObject, Player player, SwingGUI window, KeyEvent e) {
-        window.displayText("chest menu loaded");
-        if(e.getKeyChar()=='1')
-            window.displayText("hello from chest menu");
-    }
-    
     private static void subMenu(Chest chest, Player player){
         final int NUM_CHOICES = chest.getContents().length + 1; //inventory size plus back button
         Item[] contents = chest.getContents();
@@ -235,4 +229,12 @@ public class ChestMenu {
         }
         return 1;
     }
+    
+    /* -- Begin GUI Methods (Deprecated) -- */
+//    public static void runGUI(BoardObject boardObject, Player player, SwingGUI window, KeyEvent e) {
+//        window.displayText("chest menu loaded");
+//        if(e.getKeyChar()=='1')
+//            window.displayText("hello from chest menu");
+//    }
+    /* -- End GUI Methods -- */
 }

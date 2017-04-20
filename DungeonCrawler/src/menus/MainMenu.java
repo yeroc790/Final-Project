@@ -30,10 +30,6 @@ public class MainMenu implements KeyListener{
         
         Clear.clrScreen();
         System.out.println("Welcome to the Dungeon\n");
-//        window.displayText("Welcome to the Dungeon" + 
-//                            "\n" +
-//                            "-- Map --\n" +
-//                            world.playerMapString());
         System.out.println("-------- Map --------");
         world.displayPlayerMap();
         
@@ -72,55 +68,6 @@ public class MainMenu implements KeyListener{
         }
     }
     
-    public static void runGUI(String file, SwingGUI window){
-        if(file!= "" && file!= null)
-            world = new World(file);
-        else
-            world = new World();
-        
-//        window.displayTitle("<html><div style='text-align:center;'>Welcome to the Dungeon</div></html>");
-        window.displayGame(world.playerMapString());
-        window.displayText("Move around using wasd");
-    }
-    
-    public static void guiInput(KeyEvent e, SwingGUI window){ //gui version
-        MainMenu.window = window;
-        world.addWindow(window);
-        char answerChar = e.getKeyChar();
-        window.setPlayer(world.getPlayer());
-        
-        window.displayText("");
-        switch (answerChar){
-            case 'w':
-                world.movePlayerGUI('u', window, e);
-                break;
-            case 's':
-                world.movePlayerGUI('d', window, e);
-                break;
-            case 'a':
-                world.movePlayerGUI('l', window, e);
-                break;
-            case 'd':
-                world.movePlayerGUI('r', window, e);
-                break;
-            case 'i':
-                window.setMenu(window.INVENTORY_MENU);
-                menus.InventoryMenu.guiInput(e, window, world.getPlayer());
-                break;
-            case '0':
-                break;
-            case 't':
-                window.displayGame("this is a test");
-                break;
-            case 'm':
-                window.displayGame(world.playerMapString());
-                break;
-            default:
-                System.out.println("Invalid input, try again");
-                break;
-        }
-    }
-    
     public static void removeObject(int x, int y){
         BoardObject[][] map = world.getMap();
         map[x][y] = new Floor(x, y);
@@ -142,4 +89,55 @@ public class MainMenu implements KeyListener{
     public void keyReleased(KeyEvent e) {
         
     }
+    
+    /* -- Begin GUI Methods (Deprecated -- */
+//    public static void runGUI(String file, SwingGUI window){
+//        if(file!= "" && file!= null)
+//            world = new World(file);
+//        else
+//            world = new World();
+//        
+////        window.displayTitle("<html><div style='text-align:center;'>Welcome to the Dungeon</div></html>");
+//        window.displayGame(world.playerMapString());
+//        window.displayText("Move around using wasd");
+//    }
+//    
+//    public static void guiInput(KeyEvent e, SwingGUI window){ //gui version
+//        MainMenu.window = window;
+//        world.addWindow(window);
+//        char answerChar = e.getKeyChar();
+//        window.setPlayer(world.getPlayer());
+//        
+//        window.displayText("");
+//        switch (answerChar){
+//            case 'w':
+//                world.movePlayerGUI('u', window, e);
+//                break;
+//            case 's':
+//                world.movePlayerGUI('d', window, e);
+//                break;
+//            case 'a':
+//                world.movePlayerGUI('l', window, e);
+//                break;
+//            case 'd':
+//                world.movePlayerGUI('r', window, e);
+//                break;
+//            case 'i':
+//                window.setMenu(window.INVENTORY_MENU);
+//                menus.InventoryMenu.guiInput(e, window, world.getPlayer());
+//                break;
+//            case '0':
+//                break;
+//            case 't':
+//                window.displayGame("this is a test");
+//                break;
+//            case 'm':
+//                window.displayGame(world.playerMapString());
+//                break;
+//            default:
+//                System.out.println("Invalid input, try again");
+//                break;
+//        }
+//    }
+    /* -- End GUI Methods -- */
 }

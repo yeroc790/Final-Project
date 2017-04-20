@@ -5,7 +5,6 @@
  */
 package objects;
 
-import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -13,7 +12,6 @@ import java.util.Scanner;
 import menus.*;
 import objects.monsters.tier1.Tier1;
 import resources.Clear;
-import swing.SwingGUI;
 
 /**
  *
@@ -24,7 +22,7 @@ public class World {
     private int size; //determines the length and width of the map, probably start at 20 or 50
     private BoardObject[][] map;
     private Player player;
-    private SwingGUI window;
+//    private SwingGUI window; //deprecated
     
     /* -- Begin Constructors -- */
     public World(){
@@ -37,20 +35,6 @@ public class World {
         size = 10;
         map = new BoardObject[size][size];
         loadGame(file);
-    }
-    
-    public World(SwingGUI window){
-        size = 10;
-        map = new BoardObject[size][size];
-        loadGame(DEFAULT_GAME);
-        this.window = window;
-    }
-    
-    public World(String file, SwingGUI window){
-        size = 10;
-        map = new BoardObject[size][size];
-        loadGame(file);
-        this.window = window;
     }
     /* -- End Constructors -- */
     
@@ -188,61 +172,6 @@ public class World {
         }
     }
     
-    public void movePlayerGUI(char dir, SwingGUI window, KeyEvent e){
-        int x = player.getX();
-        int y = player.getY();
-        
-        switch(dir){
-            case 'u':
-                explore(x-1,y);
-                if(canMove('u')){
-                    map[x-1][y] = player;
-                    map[x][y] = new BoardObject(x, y);
-                    player.setX(x-1);
-                }else{
-                    interactGUI(x-1,y, window, e);
-                }
-                playerMapGUI();
-                break;
-            case 'd':
-                explore(x+1,y);
-                if(canMove('d')){
-                    map[x+1][y] = player;
-                    map[x][y] = new BoardObject(x, y);
-                    player.setX(x+1);
-                }else{
-                    interactGUI(x+1,y,window, e);
-                }
-                playerMapGUI();
-                break;
-            case 'l':
-                explore(x,y-1);
-                if(canMove('l')){
-                    map[x][y-1] = player;
-                    map[x][y] = new BoardObject(x, y);
-                    player.setY(y-1);
-                }else{
-                    interactGUI(x,y-1,window, e);
-                }
-                playerMapGUI();
-                break;
-            case 'r':
-                explore(x,y+1);
-                if(canMove('r')){
-                    map[x][y+1] = player;
-                    map[x][y] = new BoardObject(x, y);
-                    player.setY(y+1);
-                }else{
-                    interactGUI(x,y+1,window, e);
-                }
-                playerMapGUI();
-                break;
-            default:
-                System.out.println("Error: Invalid direction");
-                System.exit(0);
-        }
-    }
-    
     public boolean canMove(char dir){
         int x = player.getX();
         int y = player.getY();
@@ -313,32 +242,6 @@ public class World {
                 break;
         }
     }
-    
-    public void interactGUI(int x, int y, SwingGUI window, KeyEvent e){
-        switch(map[x][y].getDisplay()){
-            case '#':
-                window.displayText("\n -- There is a wall blocking your path --\n");
-                break;
-            case 'C':
-                window.displayGame(playerMapString());
-                window.setMenu(window.CHEST_MENU);
-                ChestMenu.runGUI(map[x][y], player, window, e);
-                window.setMenu(window.MAIN_MENU);
-                break;
-            case '1':
-                //needs to only run the first time
-                if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){ //if the object is not a specified monster
-                    Tier1 randMonster = (Tier1)Tier1.getRandomMonster(x,y); //creating the monster
-                    map[x][y] = randMonster;
-                }
-                //map[x][y] is now of type Tier1
-                Tier1 randMonster = (Tier1)map[x][y];
-                window.setMenu(window.CHEST_MENU);
-                MonsterMenu.runGUI(randMonster, getPlayer(), window, e); //running the menu
-                window.setMenu(window.MAIN_MENU);
-                break;
-        }
-    }
     /* -- End Movement Methods -- */
     
     /* -- Begin Display Methods -- */
@@ -353,10 +256,6 @@ public class World {
 //        window.displayText(mapString());
     }
     
-    public void mapGUI(){
-        window.displayGame(mapString());
-    }
-    
     public void displayPlayerMap(){
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -366,10 +265,6 @@ public class World {
         }
         System.out.println();
 //        window.displayText(playerMapString());
-    }
-    
-    public void playerMapGUI(){
-        window.displayGame(playerMapString());
     }
     
     public String mapString(){
@@ -395,9 +290,114 @@ public class World {
         s+="\n";
         return s;
     }
-    
-    public void addWindow(SwingGUI window){
-        this.window = window;
-    }
     /* -- End Display Methods -- */
+    
+    /* -- Begin GUI Methods (Deprecated) -- */
+//    public World(SwingGUI window){
+//        size = 10;
+//        map = new BoardObject[size][size];
+//        loadGame(DEFAULT_GAME);
+//        this.window = window;
+//    }
+    
+//    public World(String file, SwingGUI window){
+//        size = 10;
+//        map = new BoardObject[size][size];
+//        loadGame(file);
+//        this.window = window;
+//    }
+    
+//    public void addWindow(SwingGUI window){
+//        this.window = window;
+//    }
+    
+//    public void playerMapGUI(){
+//        window.displayGame(playerMapString());
+//    }
+    
+//    public void mapGUI(){
+//        window.displayGame(mapString());
+//    }
+    
+//    public void movePlayerGUI(char dir, SwingGUI window, KeyEvent e){
+//        int x = player.getX();
+//        int y = player.getY();
+//        
+//        switch(dir){
+//            case 'u':
+//                explore(x-1,y);
+//                if(canMove('u')){
+//                    map[x-1][y] = player;
+//                    map[x][y] = new BoardObject(x, y);
+//                    player.setX(x-1);
+//                }else{
+//                    interactGUI(x-1,y, window, e);
+//                }
+//                playerMapGUI();
+//                break;
+//            case 'd':
+//                explore(x+1,y);
+//                if(canMove('d')){
+//                    map[x+1][y] = player;
+//                    map[x][y] = new BoardObject(x, y);
+//                    player.setX(x+1);
+//                }else{
+//                    interactGUI(x+1,y,window, e);
+//                }
+//                playerMapGUI();
+//                break;
+//            case 'l':
+//                explore(x,y-1);
+//                if(canMove('l')){
+//                    map[x][y-1] = player;
+//                    map[x][y] = new BoardObject(x, y);
+//                    player.setY(y-1);
+//                }else{
+//                    interactGUI(x,y-1,window, e);
+//                }
+//                playerMapGUI();
+//                break;
+//            case 'r':
+//                explore(x,y+1);
+//                if(canMove('r')){
+//                    map[x][y+1] = player;
+//                    map[x][y] = new BoardObject(x, y);
+//                    player.setY(y+1);
+//                }else{
+//                    interactGUI(x,y+1,window, e);
+//                }
+//                playerMapGUI();
+//                break;
+//            default:
+//                System.out.println("Error: Invalid direction");
+//                System.exit(0);
+//        }
+//    }
+    
+//    public void interactGUI(int x, int y, SwingGUI window, KeyEvent e){
+//        switch(map[x][y].getDisplay()){
+//            case '#':
+//                window.displayText("\n -- There is a wall blocking your path --\n");
+//                break;
+//            case 'C':
+//                window.displayGame(playerMapString());
+//                window.setMenu(window.CHEST_MENU);
+//                ChestMenu.runGUI(map[x][y], player, window, e);
+//                window.setMenu(window.MAIN_MENU);
+//                break;
+//            case '1':
+//                //needs to only run the first time
+//                if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){ //if the object is not a specified monster
+//                    Tier1 randMonster = (Tier1)Tier1.getRandomMonster(x,y); //creating the monster
+//                    map[x][y] = randMonster;
+//                }
+//                //map[x][y] is now of type Tier1
+//                Tier1 randMonster = (Tier1)map[x][y];
+//                window.setMenu(window.CHEST_MENU);
+//                MonsterMenu.runGUI(randMonster, getPlayer(), window, e); //running the menu
+//                window.setMenu(window.MAIN_MENU);
+//                break;
+//        }
+//    }
+    /* -- End GUI Methods -- */
 }

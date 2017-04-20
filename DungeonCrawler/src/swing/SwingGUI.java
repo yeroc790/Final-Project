@@ -200,18 +200,18 @@ public class SwingGUI   extends JFrame
         switch(menu){ //menu needs to be set to determine where input goes
             case MAIN_MENU:
                 displayText("Loading main menu");
-                menus.MainMenu.guiInput(e, this);
+//                menus.MainMenu.guiInput(e, this); method is deprecated
                 break;
             case INVENTORY_MENU:
                 displayText("Loading main menu");
-                menus.InventoryMenu.guiInput(e, this, player);
+//                menus.InventoryMenu.guiInput(e, this, player); //method is deprecated
                 break;
         }
         
     }
     
     private void startGame(String gameFile){
-        menus.MainMenu.runGUI(gameFile, this);
+//        menus.MainMenu.runGUI(gameFile, this); //method is deprecated
     }
     
     public void displayGame(String text){

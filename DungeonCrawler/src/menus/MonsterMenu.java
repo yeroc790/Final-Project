@@ -24,12 +24,6 @@ public class MonsterMenu {
         encounter(monster,player);
     }
     
-    public static void runGUI(Tier1 randMonster, Player player, SwingGUI window, KeyEvent e) {
-        window.displayText("monster menu loaded");
-        if(e.getKeyChar()=='1')
-            window.displayText("hello from monster menu");
-    }
-    
     public static void encounter(Tier1 monster, Player player){
         Scanner input = new Scanner(System.in);
         String answer;
@@ -92,11 +86,6 @@ public class MonsterMenu {
             attack[1] = (defense[0]*(-1));
         }else
             attack[1] = 0;
-        
-//        health[1] = health[1] - (defense[1] - attack[0]);
-        
-//        health[1] -= attack[0]; //player attacks
-//        health[0] -= attack[1]; //monster attacks
         
         //player display
         if(attack[0]==0)
@@ -230,4 +219,14 @@ public class MonsterMenu {
         }while(quit == false);
         return choice;
     }
+    
+    /* -- Begin GUI Methods (Deprecated) -- */
+//    public static void runGUI(Tier1 randMonster, Player player, SwingGUI window, KeyEvent e) {
+//        window.displayText("monster menu loaded");
+//        if(e.getKeyChar()=='1')
+//            window.displayText("hello from monster menu");
+//    }
+    
+    
+    /* -- End GUI Methods -- */
 }
