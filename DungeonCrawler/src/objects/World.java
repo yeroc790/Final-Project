@@ -19,21 +19,20 @@ import resources.Clear;
  */
 public class World {
     private static final String DEFAULT_GAME = "src\\resources\\map1.txt"; //filepath for the text file containing the map setup
-    private int size; //determines the length and width of the map, probably start at 20 or 50
+    private int rows;
+    private int cols;
     private BoardObject[][] map;
     private Player player;
+    private Door door;
+    private Lever lever;
 //    private SwingGUI window; //deprecated
     
     /* -- Begin Constructors -- */
     public World(){
-        size = 10;
-        map = new BoardObject[size][size];
         loadGame(DEFAULT_GAME);
     }
     
     public World(String file){
-        size = 10;
-        map = new BoardObject[size][size];
         loadGame(file);
     }
     /* -- End Constructors -- */
@@ -43,9 +42,13 @@ public class World {
         return DEFAULT_GAME;
     }
     
-    public int getSize(){
-        return size;
+    public int getRows(){
+        return rows;
     }
+    
+//    public int getCols(){
+//        return cols;
+//    }
     
     public BoardObject[][] getMap(){
         return Arrays.copyOf(map, map.length);
@@ -65,7 +68,7 @@ public class World {
     /* -- Begin Setup Methods -- */
     public void loadGame(String filepath){
         Scanner fileIn = null;
-        String[] file = new String[size]; 
+        String[] file;
         String temp;
         
         try{
@@ -75,6 +78,10 @@ public class World {
             System.exit(0);
         }
         
+        getSize(filepath);
+        file = new String[rows];
+        map = new BoardObject[rows][cols];
+        
         int index = 0;
         while(fileIn.hasNextLine()){
             temp = fileIn.nextLine();
@@ -82,8 +89,8 @@ public class World {
             index++;
         }
         char objectChar;
-        for (int row = 0; row < size; row++) {
-            for (int col = 0; col < size; col++) {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
                 objectChar = file[row].charAt(col);
                 if(objectChar=='P'){
                     player = new Player(row, col);
@@ -92,6 +99,12 @@ public class World {
                     map[row][col] = new Chest(row, col);
                 }else if(objectChar=='#'){
                     map[row][col] = new Wall(row, col);
+                }else if(objectChar=='|'){
+                    map[row][col] = new Door(row, col);
+                    door = (Door)map[row][col];
+                }else if(objectChar=='L'){
+                    map[row][col] = new Lever(row, col);
+                    lever = (Lever)map[row][col];
                 }else if(objectChar==' '){
                     map[row][col] = new Floor(row, col);
                 }else{
@@ -115,11 +128,11 @@ public class World {
         Clear.clrScreen();
         switch(dir){
             case 'u':
-                explore(x-1,y);
                 if(canMove('u')){
                     map[x-1][y] = player;
                     map[x][y] = new BoardObject(x, y);
                     player.setX(x-1);
+                    explore(x-1,y);
                     displayPlayerMap();
                 }else{
                     Clear.clrScreen();
@@ -128,11 +141,11 @@ public class World {
                 }
                 break;
             case 'd':
-                explore(x+1,y);
                 if(canMove('d')){
                     map[x+1][y] = player;
                     map[x][y] = new BoardObject(x, y);
                     player.setX(x+1);
+                    explore(x+1,y);
                     displayPlayerMap();
                 }else{
                     Clear.clrScreen();
@@ -141,11 +154,11 @@ public class World {
                 }
                 break;
             case 'l':
-                explore(x,y-1);
                 if(canMove('l')){
                     map[x][y-1] = player;
                     map[x][y] = new BoardObject(x, y);
                     player.setY(y-1);
+                    explore(x,y-1);
                     displayPlayerMap();
                 }else{
                     Clear.clrScreen();
@@ -154,11 +167,11 @@ public class World {
                 }
                 break;
             case 'r':
-                explore(x,y+1);
                 if(canMove('r')){
                     map[x][y+1] = player;
                     map[x][y] = new BoardObject(x, y);
                     player.setY(y+1);
+                    explore(x,y+1);
                     displayPlayerMap();
                 }else{
                     Clear.clrScreen();
@@ -219,6 +232,46 @@ public class World {
     
     public void explore(int x, int y){
         map[x][y].setDisplayCopy(map[x][y].getDisplay());
+        /* -- To explore in a circle around the player -- */
+        //left of player
+        try{
+            map[x-1][y].setDisplayCopy(map[x-1][y].getDisplay());
+        }catch(Exception e){};
+        
+        //above and left of player
+        try{
+            map[x-1][y-1].setDisplayCopy(map[x-1][y-1].getDisplay());
+        }catch(Exception e){};
+        
+        //above player
+        try{
+            map[x][y-1].setDisplayCopy(map[x][y-1].getDisplay());
+        }catch(Exception e){};
+        
+        //above and right of player
+        try{
+            map[x+1][y-1].setDisplayCopy(map[x+1][y-1].getDisplay());
+        }catch(Exception e){};
+        
+        //right of player
+        try{
+            map[x+1][y].setDisplayCopy(map[x+1][y].getDisplay());
+        }catch(Exception e){};
+        
+        //below and right of player
+        try{
+            map[x+1][y+1].setDisplayCopy(map[x+1][y+1].getDisplay());
+        }catch(Exception e){};
+        
+        //below player
+        try{
+            map[x][y+1].setDisplayCopy(map[x][y+1].getDisplay());
+        }catch(Exception e){};
+        
+        //below and left of player
+        try{
+            map[x-1][y+1].setDisplayCopy(map[x-1][y+1].getDisplay());
+        }catch(Exception e){};
     }
     
     public void interact(int x, int y){
@@ -240,14 +293,32 @@ public class World {
                 Tier1 randMonster = (Tier1)map[x][y];
                 MonsterMenu.run(randMonster, getPlayer()); //running the menu
                 break;
+            case '|':
+                if(door.checkDoor()){
+                    //door is open
+                    System.out.println("Congratulations, you beat the level");
+                    System.exit(0); //change to load next level
+                }else{
+                    System.out.println("This door is locked. Maybe there's a lever somewhere nearby...");
+                }
+                break;
+            case 'L':
+                if(lever.checkLever()){
+                    //lever is pulled
+                    System.out.println("You already pulled that lever, go find the door it opened");
+                }else{
+                    System.out.println("You pull the lever and hear the faint groaning of large doors swinging open");
+                    door.openDoor(true);
+                    lever.flipLever(true);
+                }
         }
     }
     /* -- End Movement Methods -- */
     
     /* -- Begin Display Methods -- */
     public void displayMap(){
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 System.out.print(map[i][j].getDisplay());
             }
             System.out.println();
@@ -257,8 +328,8 @@ public class World {
     }
     
     public void displayPlayerMap(){
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 System.out.print(map[i][j].getDisplayCopy());
             }
             System.out.println();
@@ -269,8 +340,8 @@ public class World {
     
     public String mapString(){
         String s = "";
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 s+=(map[i][j].getDisplay());
             }
             s+="\n";
@@ -281,8 +352,8 @@ public class World {
     
     public String playerMapString(){
         String s = "";
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 s+=(map[i][j].getDisplayCopy());
             }
             s+="\n";
@@ -292,7 +363,30 @@ public class World {
     }
     /* -- End Display Methods -- */
     
+    public void getSize(String filepath){
+        Scanner fileIn = null;
+        try{
+            fileIn = new Scanner(new FileInputStream(filepath)); //I need to make sure that this doesn't create an empty file
+        }catch(FileNotFoundException e){
+            System.out.println("The game resource file could not be found or opened");
+            System.exit(0);
+        }
+        
+        String temp;
+        int rows = 0;
+        int cols = 0;
+        while(fileIn.hasNextLine()){
+            temp = fileIn.nextLine();
+            cols = temp.length();
+            rows++;
+        }
+        
+        this.rows = rows;
+        this.cols = cols;
+    }
+    
     /* -- Begin GUI Methods (Deprecated) -- */
+    public void foo(){ //hides block of deprecated code
 //    public World(SwingGUI window){
 //        size = 10;
 //        map = new BoardObject[size][size];
@@ -399,5 +493,6 @@ public class World {
 //                break;
 //        }
 //    }
+    }
     /* -- End GUI Methods -- */
 }

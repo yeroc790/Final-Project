@@ -79,7 +79,7 @@ public class Chest extends BoardObject{
     public void populateChest(int numItems){
 //        int low = 1, high = numItems;
         Random r = new Random();
-        numItems = r.nextInt(numItems-1)+1;
+        numItems = r.nextInt(numItems-2)+2;
         int rand;
         Item[] contents = new Item[numItems];
         

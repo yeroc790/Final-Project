@@ -31,8 +31,8 @@ public class MainMenu implements KeyListener{
         Clear.clrScreen();
         System.out.println("Welcome to the Dungeon\n");
         System.out.println("-------- Map --------");
+        world.explore(world.getPlayer().getX(), world.getPlayer().getY());
         world.displayPlayerMap();
-        
         while(quit==false){
             System.out.println("Move with WASD, type I for inventory, type 0 to quit");
             answer = input.next().toLowerCase() + "\n";
