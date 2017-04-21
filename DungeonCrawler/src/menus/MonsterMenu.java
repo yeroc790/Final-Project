@@ -42,6 +42,9 @@ public class MonsterMenu {
             }else{
                 encounter(monster, player);
             }
+        }else if(choice == 1){ //inventory
+            menus.InventoryMenu.run(player);
+            encounter(monster, player);
         }else{ //run
             System.out.println("-- You ran away --");
             return;
@@ -150,9 +153,9 @@ public class MonsterMenu {
     private static int subMenu(){
         //1. Fight
         //2. Run
-        final int NUM_CHOICES = 2;
+        final int NUM_CHOICES = 3;
         String[] header = new String[NUM_CHOICES];
-        String[] choices = {"Fight", "Run"};
+        String[] choices = {"Fight", "Inventory", "Run"};
         Scanner input = new Scanner(System.in);
         String answer = "   ";
         char answerChar = 0;

@@ -216,9 +216,9 @@ public class ChestMenu {
         
         switch(choice){
             case 0: //inspect
-                System.out.println("\n-----------------------------------");
+                System.out.println("\n---------------------------------------------------------------------");
                 System.out.println(item.getName() + " - " + item.getStat() + " - \"" + item.getDesc() + "\"");
-                System.out.println("-------------------------------------\n");
+                System.out.println("---------------------------------------------------------------------\n");
                 break;
             case 1: //take
                 chest.takeItem(index, player);

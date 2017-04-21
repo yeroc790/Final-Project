@@ -18,7 +18,10 @@ import resources.Clear;
  * @author hansenc
  */
 public class World {
-    private static final String DEFAULT_GAME = "src\\resources\\map1.txt"; //filepath for the text file containing the map setup
+    private static final String path = "src/resources/";
+    private static final String[] maps = {path+"map1.txt", path+"map2.txt", path+"objectTest.txt"};
+    private static final String DEFAULT_GAME = maps[0]; //filepath for the text file containing the map setup
+    private int currentLevel;
     private int rows;
     private int cols;
     private BoardObject[][] map;
@@ -30,10 +33,17 @@ public class World {
     /* -- Begin Constructors -- */
     public World(){
         loadGame(DEFAULT_GAME);
+        currentLevel = 0;
     }
     
     public World(String file){
         loadGame(file);
+        currentLevel = 0;
+    }
+    
+    public World(int level){
+        loadGame(maps[level]);
+        currentLevel = level;
     }
     /* -- End Constructors -- */
     
@@ -88,13 +98,17 @@ public class World {
             file[index] = temp;
             index++;
         }
+        
         char objectChar;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 objectChar = file[row].charAt(col);
                 if(objectChar=='P'){
-                    player = new Player(row, col);
+                    if(currentLevel==0)
+                        player = new Player(row, col);
                     map[row][col] = player;
+                    player.setX(row);
+                    player.setY(col);
                 }else if(objectChar=='C'){
                     map[row][col] = new Chest(row, col);
                 }else if(objectChar=='#'){
@@ -297,7 +311,8 @@ public class World {
                 if(door.checkDoor()){
                     //door is open
                     System.out.println("Congratulations, you beat the level");
-                    System.exit(0); //change to load next level
+                    currentLevel++;
+                    loadGame(maps[currentLevel]);
                 }else{
                     System.out.println("This door is locked. Maybe there's a lever somewhere nearby...");
                 }
@@ -311,6 +326,7 @@ public class World {
                     door.openDoor(true);
                     lever.flipLever(true);
                 }
+                break;
         }
     }
     /* -- End Movement Methods -- */
@@ -328,6 +344,7 @@ public class World {
     }
     
     public void displayPlayerMap(){
+        System.out.println("\n------ Level " + (currentLevel+1) + " ------\n");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 System.out.print(map[i][j].getDisplayCopy());

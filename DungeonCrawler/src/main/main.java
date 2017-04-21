@@ -25,6 +25,7 @@ public class main {
 //            SwingGUI test = new SwingGUI("");
 //        }else{
             //run console
+            String path = "src/resources/";
             menus.MainMenu.run("");
 //        }
     }
