@@ -20,7 +20,7 @@ import resources.Clear;
  */
 public class World {
     private static final String path = "src/resources/";
-    private static final String[] maps = {path+"map1.txt", path+"map2.txt", path+"objectTest.txt"};
+    private static final String[] maps = {path+"map1.txt", path+"map2.txt", path+"map3.txt", path+"map4.txt", path+"map5.txt"};
     private static final String DEFAULT_GAME = maps[0]; //filepath for the text file containing the map setup
     private int currentLevel;
     private int rows;
