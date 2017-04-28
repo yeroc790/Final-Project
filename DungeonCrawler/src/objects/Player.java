@@ -99,9 +99,11 @@ public class Player extends Character{
     
     public void removeFromInventory(Item item){
         for(int i = 0; i < inventory.length; i++){
-            if(inventory[i].equals(item)){
-                inventory[i] = null;
-                return;
+            if(inventory[i]!=null){
+                if(inventory[i].equals(item)){
+                    inventory[i] = null;
+                    return;
+                }
             }
         }
         System.out.println("\nCould not find item in inventory");

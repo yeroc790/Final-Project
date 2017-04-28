@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import menus.*;
 import objects.monsters.tier1.Tier1;
+import objects.monsters.tier2.Tier2;
 import resources.Clear;
 
 /**
@@ -131,6 +132,7 @@ public class World {
                 map[row][col].setY(col);
             }
         }
+        explore(player.getX(), player.getY());
     }
     /* -- End Setup Methods -- */
     
@@ -300,12 +302,22 @@ public class World {
             case '1':
                 //needs to only run the first time
                 if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){ //if the object is not a specified monster
-                    Tier1 randMonster = (Tier1)Tier1.getRandomMonster(x,y); //creating the monster
-                    map[x][y] = randMonster;
+                    Tier1 randMonster1 = (Tier1)Tier1.getRandomMonster(x,y); //creating the monster
+                    map[x][y] = randMonster1;
                 }
                 //map[x][y] is now of type Tier1
                 Tier1 randMonster = (Tier1)map[x][y];
                 MonsterMenu.run(randMonster, getPlayer()); //running the menu
+                break;
+            case '2':
+                //needs to only run the first time
+                if(!(map[x][y] instanceof objects.monsters.tier2.Tier2)){ //if the object is not a specified monster
+                    Tier2 randMonster2 = (Tier2)Tier2.getRandomMonster(x,y); //creating the monster
+                    map[x][y] = randMonster2;
+                }
+                //map[x][y] is now of type Tier1
+                Tier2 randMonster2 = (Tier2)map[x][y];
+                MonsterMenu.run(randMonster2, getPlayer()); //running the menu
                 break;
             case '|':
                 if(door.checkDoor()){

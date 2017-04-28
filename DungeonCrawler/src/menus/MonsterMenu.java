@@ -5,26 +5,25 @@
  */
 package menus;
 
-import java.awt.event.KeyEvent;
 import java.util.Random;
 import java.util.Scanner;
 import objects.Player;
+import objects.monsters.Monster;
 import objects.monsters.tier1.Tier1;
 import resources.Clear;
-import swing.SwingGUI;
 
 /**
  *
  * @author hansenc
  */
 public class MonsterMenu {
-    public static void run(Tier1 monster, Player player){
+    public static void run(Monster monster, Player player){
         System.out.println("\n-- There is a " + monster.getName() + " blocking your path! --");
        
         encounter(monster,player);
     }
     
-    public static void encounter(Tier1 monster, Player player){
+    public static void encounter(Monster monster, Player player){
         Scanner input = new Scanner(System.in);
         String answer;
         int choice;
@@ -51,7 +50,7 @@ public class MonsterMenu {
         }
     }
     
-    private static boolean attack(Tier1 monster, Player player){ //returns true if monster is dead
+    private static boolean attack(Monster monster, Player player){ //returns true if monster is dead
         Random r = new Random();
         final int CRIT_CHANCE = 30;
         String name = monster.getName();

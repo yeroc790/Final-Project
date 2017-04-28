@@ -219,6 +219,7 @@ public class ChestMenu {
                 System.out.println("\n---------------------------------------------------------------------");
                 System.out.println(item.getName() + " - " + item.getStat() + " - \"" + item.getDesc() + "\"");
                 System.out.println("---------------------------------------------------------------------\n");
+                itemMenu(chest, index, player);
                 break;
             case 1: //take
                 chest.takeItem(index, player);

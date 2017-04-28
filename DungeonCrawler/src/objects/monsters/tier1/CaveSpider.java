@@ -7,22 +7,22 @@ package objects.monsters.tier1;
 
 /**
  *
- * @author hansenc
+ * @author Corey
  */
-public class Goblin extends Tier1{
-    private final int ATTACK = 10;
+public class CaveSpider extends Tier1{
+    private final int ATTACK = 5;
     private final int DEFENSE = 0;
-    private final int HEALTH = 20;
+    private final int HEALTH = 15;
     
-    public Goblin(int row, int col) {
-        super(row, col, "Goblin");
+    public CaveSpider(int row, int col) {
+        super(row, col, "Cave Spider");
         setAttack(ATTACK);
         setDefense(DEFENSE);
         setHealth(HEALTH);
     }
     
-    public Goblin(){
-        super(0,0,"Goblin");
+    public CaveSpider(){
+        super(0,0,"Cave Spider");
         setAttack(ATTACK);
         setDefense(DEFENSE);
         setHealth(HEALTH);
