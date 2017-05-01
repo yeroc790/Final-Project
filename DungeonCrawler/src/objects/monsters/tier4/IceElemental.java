@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package objects.monsters.tier2;
+package objects.monsters.tier4;
 
 /**
  *
- * @author hansenc
+ * @author Corey
  */
-public class Goblin extends Tier2{
-    private final int ATTACK = 10;
+public class IceElemental extends Tier4{
+    private final int ATTACK = 25;
     private final int DEFENSE = 0;
-    private final int HEALTH = 20;
+    private final int HEALTH = 15;
     
-    public Goblin(int row, int col) {
-        super(row, col, "Goblin");
+    public IceElemental(int row, int col) {
+        super(row, col, "Ice Elemental");
         setAttack(ATTACK);
         setDefense(DEFENSE);
         setHealth(HEALTH);
     }
     
-    public Goblin(){
-        super(0,0,"Goblin");
+    public IceElemental(){
+        super(0,0,"Ice Elemental");
         setAttack(ATTACK);
         setDefense(DEFENSE);
         setHealth(HEALTH);

@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.Scanner;
 import objects.Player;
 import objects.monsters.Monster;
-import objects.monsters.tier1.Tier1;
+import objects.monsters.boss.Azmodan;
 import resources.Clear;
 
 /**
@@ -18,7 +18,11 @@ import resources.Clear;
  */
 public class MonsterMenu {
     public static void run(Monster monster, Player player){
-        System.out.println("\n-- There is a " + monster.getName() + " blocking your path! --");
+//        Azmodan boss = new Azmodan();
+        if(monster instanceof Azmodan)
+            System.out.println("\n-- " + monster.getName() + " looms over you! --");
+        else
+            System.out.println("\n-- There is a " + monster.getName() + " blocking your path! --");
        
         encounter(monster,player);
     }
@@ -74,6 +78,7 @@ public class MonsterMenu {
             }
         }
         
+        //player attack
         //damage goes through defense shield first
         defense[1] -= attack[0];
         if(defense[1]<=0){
@@ -82,13 +87,6 @@ public class MonsterMenu {
         }else
             attack[0] = 0;
             
-        defense[0] -= attack[1];
-        if(defense[0]<=0){
-            health[0] -= (defense[0]*(-1));
-            attack[1] = (defense[0]*(-1));
-        }else
-            attack[1] = 0;
-        
         //player display
         if(attack[0]==0)
             System.out.println("\n-- You attacked the " + name + " and missed --");
@@ -96,6 +94,23 @@ public class MonsterMenu {
             System.out.println("\n-- You landed a critical hit on the " + name + " for " + attack[0] + " damage! --");
         else
             System.out.println("\n-- You attacked the " + name + " for " + attack[0] + " damage --");
+        
+        //monster died
+        if(health[1]<=0){
+            System.out.println("\n-- You killed the " + name + " --");
+            System.out.println("Player health: " + health[0]);
+            player.setHealth(health[0]); 
+            monster.die();
+            return true;
+        }
+        
+        //monster attack
+        defense[0] -= attack[1];
+        if(defense[0]<=0){
+            health[0] -= (defense[0]*(-1));
+            attack[1] = (defense[0]*(-1));
+        }else
+            attack[1] = 0;
         
         //monster display
         if(attack[1]==0)
@@ -109,15 +124,6 @@ public class MonsterMenu {
         if(health[0]<0){
             System.out.println("\n-- You died, game over --");
             System.exit(0);
-        }
-        
-        //monster died
-        if(health[1]<=0){
-            System.out.println("\n-- You killed the " + name + " --");
-            System.out.println("Player health: " + health[0]);
-            player.setHealth(health[0]);
-            monster.die();
-            return true;
         }
         
         monster.setHealth(health[1]);

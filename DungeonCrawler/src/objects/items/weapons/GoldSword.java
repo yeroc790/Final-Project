@@ -11,15 +11,15 @@ package objects.items.weapons;
  */
 public class GoldSword extends Weapon{
     private static final String name = "Gold Sword";
-    private static final String stat = "Attack +3";
+    private static final String stat = "Attack +5";
     private static final String desc = "It's a shame it has to get covered in blood";
     private static final String rarity = "rare";
     
     public GoldSword(){
-        super(name, stat, desc, rarity, 3);
+        super(name, stat, desc, rarity, 5);
     }
     
     public GoldSword(boolean equipped){
-        super(name, stat, desc, rarity, 3, equipped);
+        super(name, stat, desc, rarity, 5, equipped);
     }
 }

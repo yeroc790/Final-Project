@@ -3,39 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package objects.monsters.tier1;
+package objects.monsters.tier4;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 import objects.monsters.Monster;
 
 /**
  *
- * @author hansenc
+ * @author Corey
  */
-public class Tier1 extends Monster{
-    public Tier1(int row, int col, String name) {
-        super(row, col, '1', name);
+public class Tier4 extends Monster{
+    public Tier4(int row, int col, String name) {
+        super(row, col, '4', name);
     }
     
-    public Tier1(){
-        super(0,0,'1',"Test");
+    public Tier4(){
+        super(0,0,'4',"Test");
     }
     
     public static Object getRandomMonster(int x, int y){
-        String path = "objects.monsters.tier1.";
-        String monsterNames[] = {path+"CaveSpider", path+"CaveBat", path+"FieryBat"};
+        String path = "objects.monsters.tier4.";
+        String monsterNames[] = {path+"EarthElemental", path+"FireElemental", path+"IceElental"};
         Random r = new Random();
         int low = 0;
         int high = monsterNames.length;
         int rand = r.nextInt(high-low) + low;
         
-    //    Class<?> c = Class.forName("mypackage.MyClass");
-    //    Constructor<?> cons = c.getConstructor(String.class);
-    //    Object object = cons.newInstance("MyAttributeValue");
         try{
-            Tier1 object = (Tier1)Class.forName(monsterNames[rand]).newInstance(); //running through the Tier1 constructor, not the Goblin or CaveBat constructors
+            Tier4 object = (Tier4)Class.forName(monsterNames[rand]).newInstance();
             object.setX(x);
             object.setY(y);
             return object;

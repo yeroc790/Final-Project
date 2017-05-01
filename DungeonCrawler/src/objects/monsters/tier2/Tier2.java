@@ -14,26 +14,23 @@ import objects.monsters.Monster;
  */
 public class Tier2 extends Monster{
     public Tier2(int row, int col, String name) {
-        super(row, col, '1', name);
+        super(row, col, '2', name);
     }
     
     public Tier2(){
-        super(0,0,'1',"Test");
+        super(0,0,'2',"Test");
     }
     
     public static Object getRandomMonster(int x, int y){
         String path = "objects.monsters.tier2.";
-        String monsterNames[] = {path+"Goblin", path+"GreenSlime"};
+        String monsterNames[] = {path+"BlueSlime", path+"GreenSlime", path+"RedSlime"};
         Random r = new Random();
         int low = 0;
         int high = monsterNames.length;
         int rand = r.nextInt(high-low) + low;
         
-    //    Class<?> c = Class.forName("mypackage.MyClass");
-    //    Constructor<?> cons = c.getConstructor(String.class);
-    //    Object object = cons.newInstance("MyAttributeValue");
         try{
-            Tier2 object = (Tier2)Class.forName(monsterNames[rand]).newInstance(); //running through the Tier1 constructor, not the Goblin or CaveBat constructors
+            Tier2 object = (Tier2)Class.forName(monsterNames[rand]).newInstance();
             object.setX(x);
             object.setY(y);
             return object;

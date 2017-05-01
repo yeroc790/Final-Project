@@ -9,20 +9,20 @@ package objects.monsters.tier2;
  *
  * @author Corey
  */
-public class GreenSlime extends Tier2{
-    private final int ATTACK = 10;
+public class BlueSlime extends Tier2{
+    private final int ATTACK = 6;
     private final int DEFENSE = 0;
-    private final int HEALTH = 10;
+    private final int HEALTH = 20;
     
-    public GreenSlime(int row, int col) {
-        super(row, col, "Green Slime");
+    public BlueSlime(int row, int col) {
+        super(row, col, "Blue Slime");
         setAttack(ATTACK);
         setDefense(DEFENSE);
         setHealth(HEALTH);
     }
     
-    public GreenSlime(){
-        super(0,0,"Green Slime");
+    public BlueSlime(){
+        super(0,0,"Blue Slime");
         setAttack(ATTACK);
         setDefense(DEFENSE);
         setHealth(HEALTH);

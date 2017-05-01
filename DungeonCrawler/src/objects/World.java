@@ -10,8 +10,12 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 import menus.*;
+import objects.monsters.boss.Azmodan;
 import objects.monsters.tier1.Tier1;
 import objects.monsters.tier2.Tier2;
+import objects.monsters.tier3.Tier3;
+import objects.monsters.tier4.Tier4;
+import objects.monsters.tier5.Tier5;
 import resources.Clear;
 
 /**
@@ -104,26 +108,79 @@ public class World {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 objectChar = file[row].charAt(col);
-                if(objectChar=='P'){
-                    if(currentLevel==0)
-                        player = new Player(row, col);
-                    map[row][col] = player;
-                    player.setX(row);
-                    player.setY(col);
-                }else if(objectChar=='C'){
-                    map[row][col] = new Chest(row, col);
-                }else if(objectChar=='#'){
-                    map[row][col] = new Wall(row, col);
-                }else if(objectChar=='|'){
-                    map[row][col] = new Door(row, col);
-                    door = (Door)map[row][col];
-                }else if(objectChar=='L'){
-                    map[row][col] = new Lever(row, col);
-                    lever = (Lever)map[row][col];
-                }else if(objectChar==' '){
-                    map[row][col] = new Floor(row, col);
-                }else{
-                    map[row][col] = new BoardObject(row, col, file[row].charAt(col), "default_name");
+//                if(objectChar=='P'){
+//                    if(currentLevel==0)
+//                        player = new Player(row, col);
+//                    map[row][col] = player;
+//                    player.setX(row);
+//                    player.setY(col);
+//                }else if(objectChar=='C'){
+//                    map[row][col] = new Chest(row, col);
+//                }else if(objectChar=='#'){
+//                    map[row][col] = new Wall(row, col);
+//                }else if(objectChar=='|'){
+//                    map[row][col] = new Door(row, col);
+//                    door = (Door)map[row][col];
+//                }else if(objectChar=='L'){
+//                    map[row][col] = new Lever(row, col);
+//                    lever = (Lever)map[row][col];
+//                }else if(objectChar==' '){
+//                    map[row][col] = new Floor(row, col);
+//                }else{
+//                    map[row][col] = new BoardObject(row, col, file[row].charAt(col), "default_name");
+//                }
+                switch(objectChar){
+                    case 'P':
+                        if(currentLevel==0)
+                            player = new Player(row, col);
+                        map[row][col] = player;
+                        player.setX(row);
+                        player.setY(col);
+                        break;
+                    case '#':
+                        map[row][col] = new Wall(row, col);
+                        break;
+                    case 'C':
+                        map[row][col] = new Chest(row, col);
+                        break;
+                    case 'L':
+                        map[row][col] = new Lever(row, col);
+                        lever = (Lever)map[row][col];
+                        break;
+                    case '|':
+                        map[row][col] = new Door(row, col);
+                        door = (Door)map[row][col];
+                        break;
+                    case ' ':
+                        map[row][col] = new Floor(row, col);
+                        break;
+                    case '1':
+                        Tier1 randMonster1 = (Tier1)Tier1.getRandomMonster(row,col); //creating the monster
+                        map[row][col] = randMonster1;
+                        break;
+                    case '2':
+                        Tier2 randMonster2 = (Tier2)Tier2.getRandomMonster(row,col); //creating the monster
+                        map[row][col] = randMonster2;
+                        break;
+                    case '3':
+                        Tier3 randMonster3 = (Tier3)Tier3.getRandomMonster(row,col); //creating the monster
+                        map[row][col] = randMonster3;
+                        break;
+                    case '4':
+                        Tier4 randMonster4 = (Tier4)Tier4.getRandomMonster(row,col); //creating the monster
+                        map[row][col] = randMonster4;
+                        break;
+                    case '5':
+                        Tier5 randMonster5 = (Tier5)Tier5.getRandomMonster(row,col); //creating the monster
+                        map[row][col] = randMonster5;
+                        break;
+                    case 'B':
+                        Azmodan boss = new Azmodan(row,col);
+                        map[row][col] = boss;
+                        break;
+                    default:
+                        map[row][col] = new BoardObject(row, col, file[row].charAt(col), "default_name");
+                        break;
                 }
                 if(objectChar!='P')
                     map[row][col].setDisplayCopy('*');
@@ -301,20 +358,20 @@ public class World {
                 break;
             case '1':
                 //needs to only run the first time
-                if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){ //if the object is not a specified monster
-                    Tier1 randMonster1 = (Tier1)Tier1.getRandomMonster(x,y); //creating the monster
-                    map[x][y] = randMonster1;
-                }
+//                if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){ //if the object is not a specified monster
+//                    Tier1 randMonster1 = (Tier1)Tier1.getRandomMonster(x,y); //creating the monster
+//                    map[x][y] = randMonster1;
+//                }
                 //map[x][y] is now of type Tier1
                 Tier1 randMonster = (Tier1)map[x][y];
                 MonsterMenu.run(randMonster, getPlayer()); //running the menu
                 break;
             case '2':
                 //needs to only run the first time
-                if(!(map[x][y] instanceof objects.monsters.tier2.Tier2)){ //if the object is not a specified monster
-                    Tier2 randMonster2 = (Tier2)Tier2.getRandomMonster(x,y); //creating the monster
-                    map[x][y] = randMonster2;
-                }
+//                if(!(map[x][y] instanceof objects.monsters.tier2.Tier2)){ //if the object is not a specified monster
+//                    Tier2 randMonster2 = (Tier2)Tier2.getRandomMonster(x,y); //creating the monster
+//                    map[x][y] = randMonster2;
+//                }
                 //map[x][y] is now of type Tier1
                 Tier2 randMonster2 = (Tier2)map[x][y];
                 MonsterMenu.run(randMonster2, getPlayer()); //running the menu

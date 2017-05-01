@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package objects.monsters.tier2;
+package objects.monsters.tier1;
 
 /**
  *
  * @author Corey
  */
-public class GreenSlime extends Tier2{
-    private final int ATTACK = 10;
+public class FieryBat extends Tier1{
+    private final int ATTACK = 5;
     private final int DEFENSE = 0;
-    private final int HEALTH = 10;
+    private final int HEALTH = 15;
     
-    public GreenSlime(int row, int col) {
-        super(row, col, "Green Slime");
+    public FieryBat(int row, int col) {
+        super(row, col, "Fiery Bat");
         setAttack(ATTACK);
         setDefense(DEFENSE);
         setHealth(HEALTH);
     }
     
-    public GreenSlime(){
-        super(0,0,"Green Slime");
+    public FieryBat(){
+        super(0,0,"Fiery Bat");
         setAttack(ATTACK);
         setDefense(DEFENSE);
         setHealth(HEALTH);
