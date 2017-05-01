@@ -11,15 +11,15 @@ package objects.items.armor;
  */
 public class GoldArmor extends Armor{
     private static final String name = "Gold Armor";
-    private static final String stat = "Defense +3";
+    private static final String stat = "Defense +7";
     private static final String desc = "It's rather dashing, but also rather heavy";
-    private static final String rarity = "rare";
+    private static final String rarity = "epic";
     
     public GoldArmor(){
-        super(name, stat, desc, rarity, 3);
+        super(name, stat, desc, rarity, 7);
     }
     
     public GoldArmor(boolean equipped){
-        super(name, stat, desc, rarity, 3, equipped);
+        super(name, stat, desc, rarity, 7, equipped);
     }
 }

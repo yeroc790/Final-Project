@@ -11,8 +11,8 @@ package objects.monsters.boss;
  */
 public class Azmodan extends Boss{ //Azmodan, Hope's End
     private final int ATTACK = 40;
-    private final int DEFENSE = 0;
-    private final int HEALTH = 20;
+    private final int DEFENSE = 10;
+    private final int HEALTH = 30;
 
     public Azmodan(int row, int col) {
         super(row, col, "Azmodan, Hope's End");

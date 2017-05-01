@@ -10,15 +10,9 @@ import exceptions.InventoryFullException;
 import java.util.Arrays;
 import java.util.Random;
 import objects.items.Item;
-import objects.items.armor.Armor;
-import objects.items.armor.CopperArmor;
-import objects.items.armor.GoldArmor;
-import objects.items.armor.IronArmor;
-import objects.items.potions.Potion;
-import objects.items.weapons.Excalibur;
-import objects.items.weapons.GoldSword;
-import objects.items.weapons.IronSword;
-import objects.items.weapons.Weapon;
+import objects.items.armor.*;
+import objects.items.potions.*;
+import objects.items.weapons.*;
 
 /**
  *
@@ -110,20 +104,23 @@ public class Chest extends BoardObject{
     private static int convertRarity(String rarity){
         switch(rarity){
             case "common":
-                return 20;
+                return 50;
             case "rare":
-                return 10;
+                return 20;
             case "epic":
                 return 5;
             case "legendary":
                 return 1;
             default:
-                return 20;
+                return 50;
         }
     }
     
     public static Weapon getRandomWeapon(){
-        Weapon[] weapons = {new IronSword(), new GoldSword(), new Excalibur()}; //weapons holds the different weapons available
+        Weapon[] weapons = {
+            new IronSword(), new GoldSword(), new Excalibur(), new Morgif(), new BoneSword(), new DualDaggers(),
+            new CrossBow(), new LongBow(), new IronMace(), new FireStaff()
+        }; //weapons holds the different weapons available
         int[] weights = new int[weapons.length]; //rarity weights for each weapon
         int totalWeight = 0;
         Random r = new Random();
@@ -167,32 +164,10 @@ public class Chest extends BoardObject{
     }
     
     public static Armor getRandomArmor(){
-//        String path = "objects.items.armor.";
-//        String armorNames[] = {path+"CopperArmor", path+"IronArmor", path+"GoldArmor"};
-//        Random r = new Random();
-//        int low = 0, high = armorNames.length;
-//        int rand = r.nextInt(high-low)+low;
-//        
-//        try{
-//            Armor object = (Armor)Class.forName(armorNames[rand]).newInstance();
-//            return object;
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("Error: " + e.getMessage());
-//            System.exit(0);
-//        } catch (InstantiationException e) {
-//            System.out.println("Error: " + e.getMessage());
-//            System.exit(0);
-//        } catch (IllegalAccessException e) {
-//            System.out.println("Error: " + e.getMessage());
-//            System.exit(0);
-//        }
-//        
-//        //to keep compiler happy
-//        Armor foo = new Armor();
-//        return foo;
-        
-        Armor[] armors = {new CopperArmor(), new IronArmor(), new GoldArmor()}; //weapons holds the different weapons available
-        int[] weights = new int[armors.length]; //rarity weights for each weapon
+        Armor[] armors = {
+            new CopperArmor(), new IronArmor(), new GoldArmor(), new ChainMail(), new LeatherArmor(), new HeavensWheel()
+        }; //weapons holds the different armors available
+        int[] weights = new int[armors.length]; //rarity weights for each armor
         int totalWeight = 0;
         Random r = new Random();
         
@@ -203,11 +178,11 @@ public class Chest extends BoardObject{
         }
         
         
-        String weaponNames[] = new String[totalWeight]; //holds duplicates of all weapons, according to rarity
+        String weaponNames[] = new String[totalWeight]; //holds duplicates of all armors, according to rarity
         int index = 0;
-        for (int i = 0; i < armors.length; i++) { //loops for each type of weapon
-            for (int j = 0; j < weights[i]; j++) { //loops for the weight of that weapon
-                weaponNames[index] = armors[i].getClass().getName(); //puts that weapon's name in the list to pick from below
+        for (int i = 0; i < armors.length; i++) { //loops for each type of armor
+            for (int j = 0; j < weights[i]; j++) { //loops for the weight of that armor
+                weaponNames[index] = armors[i].getClass().getName(); //puts that armor's name in the list to pick from below
                 index++;
             }
         }
@@ -216,7 +191,7 @@ public class Chest extends BoardObject{
         int rand = r.nextInt(high-low)+low;
         
         try{
-            Armor object = (Armor)Class.forName(weaponNames[rand]).newInstance(); //picks a random weapon in the weighted list
+            Armor object = (Armor)Class.forName(weaponNames[rand]).newInstance(); //picks a random armor in the weighted list
             return object;
         } catch (ClassNotFoundException e) {
             System.out.println("Error: " + e.getMessage());
@@ -235,14 +210,32 @@ public class Chest extends BoardObject{
     }
     
     public static Potion getRandomPotion(){
-        String path = "objects.items.potions.";
-        String potionNames[] = {path+"LesserHealing", path+"GreaterHealing"};
+        Potion[] potions = {new LesserHealing(), new GreaterHealing()}; //potions holds the different potions available
+        int[] weights = new int[potions.length]; //rarity weights for each weapon
+        int totalWeight = 0;
         Random r = new Random();
+        
+        //getting total weight and populating weights
+        for (int i = 0; i < potions.length; i++) {
+            weights[i] = convertRarity(potions[i].getRarity());
+            totalWeight += weights[i];
+        }
+        
+        
+        String potionNames[] = new String[totalWeight]; //holds duplicates of all potions, according to rarity
+        int index = 0;
+        for (int i = 0; i < potions.length; i++) { //loops for each type of potion
+            for (int j = 0; j < weights[i]; j++) { //loops for the weight of that potion
+                potionNames[index] = potions[i].getClass().getName(); //puts that potion's name in the list to pick from below
+                index++;
+            }
+        }
+        
         int low = 0, high = potionNames.length;
         int rand = r.nextInt(high-low)+low;
         
         try{
-            Potion object = (Potion)Class.forName(potionNames[rand]).newInstance();
+            Potion object = (Potion)Class.forName(potionNames[rand]).newInstance(); //picks a random potion in the weighted list
             return object;
         } catch (ClassNotFoundException e) {
             System.out.println("Error: " + e.getMessage());

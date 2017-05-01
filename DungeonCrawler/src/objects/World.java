@@ -24,7 +24,7 @@ import resources.Clear;
  */
 public class World {
     private static final String path = "src/resources/";
-    private static final String[] maps = {path+"map1.txt", path+"map2.txt", path+"map3.txt", path+"map4.txt", path+"map5.txt"};
+    private static final String[] maps = {path+"map1.txt", path+"map2.txt", path+"map3.txt", path+"map4.txt", path+"map5.txt", path+"boss.txt"};
     private static final String DEFAULT_GAME = maps[0]; //filepath for the text file containing the map setup
     private int currentLevel;
     private int rows;
@@ -108,27 +108,6 @@ public class World {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 objectChar = file[row].charAt(col);
-//                if(objectChar=='P'){
-//                    if(currentLevel==0)
-//                        player = new Player(row, col);
-//                    map[row][col] = player;
-//                    player.setX(row);
-//                    player.setY(col);
-//                }else if(objectChar=='C'){
-//                    map[row][col] = new Chest(row, col);
-//                }else if(objectChar=='#'){
-//                    map[row][col] = new Wall(row, col);
-//                }else if(objectChar=='|'){
-//                    map[row][col] = new Door(row, col);
-//                    door = (Door)map[row][col];
-//                }else if(objectChar=='L'){
-//                    map[row][col] = new Lever(row, col);
-//                    lever = (Lever)map[row][col];
-//                }else if(objectChar==' '){
-//                    map[row][col] = new Floor(row, col);
-//                }else{
-//                    map[row][col] = new BoardObject(row, col, file[row].charAt(col), "default_name");
-//                }
                 switch(objectChar){
                     case 'P':
                         if(currentLevel==0)
@@ -357,31 +336,24 @@ public class World {
                 ChestMenu.run(map[x][y], player);
                 break;
             case '1':
-                //needs to only run the first time
-//                if(!(map[x][y] instanceof objects.monsters.tier1.Tier1)){ //if the object is not a specified monster
-//                    Tier1 randMonster1 = (Tier1)Tier1.getRandomMonster(x,y); //creating the monster
-//                    map[x][y] = randMonster1;
-//                }
-                //map[x][y] is now of type Tier1
                 Tier1 randMonster = (Tier1)map[x][y];
                 MonsterMenu.run(randMonster, getPlayer()); //running the menu
                 break;
             case '2':
-                //needs to only run the first time
-//                if(!(map[x][y] instanceof objects.monsters.tier2.Tier2)){ //if the object is not a specified monster
-//                    Tier2 randMonster2 = (Tier2)Tier2.getRandomMonster(x,y); //creating the monster
-//                    map[x][y] = randMonster2;
-//                }
-                //map[x][y] is now of type Tier1
                 Tier2 randMonster2 = (Tier2)map[x][y];
                 MonsterMenu.run(randMonster2, getPlayer()); //running the menu
                 break;
             case '|':
                 if(door.checkDoor()){
                     //door is open
-                    System.out.println("Congratulations, you beat the level");
                     currentLevel++;
-                    loadGame(maps[currentLevel]);
+                    if(currentLevel>=maps.length){
+                        System.out.println("You have defeated Azmodan and escaped the Dungeon!");
+                        System.exit(0);
+                    }else{
+                        System.out.println("Congratulations, you beat the level");
+                        loadGame(maps[currentLevel]);   
+                    }   
                 }else{
                     System.out.println("This door is locked. Maybe there's a lever somewhere nearby...");
                 }

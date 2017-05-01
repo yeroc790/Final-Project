@@ -11,15 +11,15 @@ package objects.items.armor;
  */
 public class IronArmor extends Armor{
     private static final String name = "Iron Armor";
-    private static final String stat = "Defense +2";
+    private static final String stat = "Defense +5";
     private static final String desc = "Does this make me look fat?";
-    private static final String rarity = "common";
+    private static final String rarity = "rare";
     
     public IronArmor(){
-        super(name, stat, desc, rarity, 2);
+        super(name, stat, desc, rarity, 5);
     }
     
     public IronArmor(boolean equipped){
-        super(name, stat, desc, rarity, 2, equipped);
+        super(name, stat, desc, rarity, 5, equipped);
     }
 }

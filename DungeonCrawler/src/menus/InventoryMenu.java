@@ -58,26 +58,6 @@ public class InventoryMenu {
         InventoryMenu.player = player;
     }
     
-    public static void displayInventory(Player player){
-        Item[] inventory = player.getInventory();
-        
-        System.out.println("\n----------------- Your Inventory ------------------");
-        for (int i = 0; i < inventory.length; i++) {
-            if(inventory[i]==null)
-                System.out.println((i+1) + ".");
-            else
-                System.out.println((i+1) + ". " + inventory[i].getName() + " - " + inventory[i].getStat());
-        }
-        System.out.println("---------------------------------------------------\n");
-    }
-    
-    public static void inspectItem(Item item){
-        if(item==null)
-            System.out.println("\n-- That slot is empty --");
-        else
-            System.out.println("\n-- " + item.getName() + " - " + item.getStat() + " --");
-    }
-    
     private static int subMenu(Player player){
         final int NUM_CHOICES = player.getInventorySize() + 1; //inventory size plus back button
         Item[] inventory = player.getInventory();
@@ -209,7 +189,6 @@ public class InventoryMenu {
 
             switch(answerChar){
                 case 'w':
-                    System.out.println("move up");
                     for (int i = 0; i < NUM_CHOICES; i++) {
                         if(header[i] == "-->"){
                             if(i == 0){
@@ -225,7 +204,6 @@ public class InventoryMenu {
                     }
                     break;
                 case 's':
-                    System.out.println("move down");
                     for (int i = 0; i < NUM_CHOICES; i++) {
                         if(header[i] == "-->"){
                             if(i == NUM_CHOICES-1){
@@ -246,23 +224,25 @@ public class InventoryMenu {
             }
             Clear.clrScreen();
             Clear.clrScreen();
+            
+            
         }while(quit == false);
         
         switch(choice){
             case 0:
                 System.out.println(item.getName() + " - " + item.getStat() + " - \"" + item.getDesc() + "\"");
+                itemMenu(item, player);
                 break;
             case 1:
                 player.equipItem(item);
                 break;
             case 2:
                 player.unequipItem(item);
+                itemMenu(item, player);
                 break;
             case 3:
                 player.removeFromInventory(item);
-                break;
             case 4:
-                break;
             default:
                 break;
         }

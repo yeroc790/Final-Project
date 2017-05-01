@@ -34,7 +34,12 @@ public class MonsterMenu {
         boolean monsterDead;
         
         System.out.println("\n" + monster.getName() + " health: " + monster.getHealth());
-        System.out.println("Player health: " + player.getHealth());
+        System.out.println(monster.getName() + " defense: " + monster.getDefense());
+        System.out.println(monster.getName() + " attack: " + monster.getAttack());
+        
+        System.out.println("\nPlayer health: " + player.getHealth());
+        System.out.println("Player defense: " + player.getTotalDefense());
+        System.out.println("Player attack: " + player.getTotalAttack());
         
         choice = subMenu();
         if(choice == 0){ //fight

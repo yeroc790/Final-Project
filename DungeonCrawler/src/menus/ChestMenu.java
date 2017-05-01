@@ -61,7 +61,7 @@ public class ChestMenu {
             if(contents[i]==null)
                 choices[i] = ("");
             else{
-                choices[i] = (contents[i].getName());
+                choices[i] = (contents[i].getName() + " - " + contents[i].getStat());
             }
         }
         choices[NUM_CHOICES-1] = "BACK";
