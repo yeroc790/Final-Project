@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
+import main.Credits;
 import menus.*;
 import objects.monsters.boss.Azmodan;
 import objects.monsters.tier1.Tier1;
@@ -25,6 +26,7 @@ import resources.Clear;
 public class World {
     private static final String path = "src/resources/";
     private static final String[] maps = {path+"map1.txt", path+"map2.txt", path+"map3.txt", path+"map4.txt", path+"map5.txt", path+"boss.txt"};
+//    private static final String[] maps = {path+"levelTest.txt"};
     private static final String DEFAULT_GAME = maps[0]; //filepath for the text file containing the map setup
     private int currentLevel;
     private int rows;
@@ -349,6 +351,7 @@ public class World {
                     currentLevel++;
                     if(currentLevel>=maps.length){
                         System.out.println("You have defeated Azmodan and escaped the Dungeon!");
+                        Credits.rollCredits();
                         System.exit(0);
                     }else{
                         System.out.println("Congratulations, you beat the level");

@@ -35,11 +35,14 @@ public class main {
         System.out.println("---------------------- Instructions ----------------------");
         System.out.println("Dungeon Crawler is a basic ASCII roguelike.");
         System.out.println("You start off in a maze, denoted by the character 'P'");
+        System.out.println("You have to explore the area to uncover what lies behind the fog, '*'");
         System.out.println("Your goal is to find the hidden lever to open the door and advance to the next level");
         System.out.println("You move around with 'w', 'a', 's', and 'd'");
         System.out.println("\nYou can interact with items in the world:");
         System.out.println("    1-5: A monster of tier 1-5");
         System.out.println("    C: A chest");
+        System.out.println("    L: A lever");
+        System.out.println("    |: The door");
         System.out.println("\nTo navigate the submenu, you can select what is currently");
         System.out.println("highlighted by the arrow by pressing ENTER. To switch selections,");
         System.out.println("type 'w' followed by ENTER to move up, or 's' followed by ENTER to move down");
