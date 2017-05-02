@@ -345,6 +345,22 @@ public class World {
                 Tier2 randMonster2 = (Tier2)map[x][y];
                 MonsterMenu.run(randMonster2, getPlayer()); //running the menu
                 break;
+            case '3':
+                Tier3 randMonster3 = (Tier3)map[x][y];
+                MonsterMenu.run(randMonster3, getPlayer());
+                break;
+            case '4':
+                Tier4 randMonster4 = (Tier4)map[x][y];
+                MonsterMenu.run(randMonster4, getPlayer());
+                break;
+            case '5':
+                Tier5 randMonster5 = (Tier5)map[x][y];
+                MonsterMenu.run(randMonster5, getPlayer());
+                break;
+            case 'B':
+                Azmodan boss = (Azmodan)map[x][y];
+                MonsterMenu.run(boss, getPlayer());
+                break;
             case '|':
                 if(door.checkDoor()){
                     //door is open

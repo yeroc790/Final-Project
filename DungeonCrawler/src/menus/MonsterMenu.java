@@ -7,6 +7,7 @@ package menus;
 
 import java.util.Random;
 import java.util.Scanner;
+import main.Credits;
 import objects.Player;
 import objects.monsters.Monster;
 import objects.monsters.boss.Azmodan;
@@ -128,6 +129,7 @@ public class MonsterMenu {
         //player died
         if(health[0]<0){
             System.out.println("\n-- You died, game over --");
+            Credits.rollCredits();
             System.exit(0);
         }
         
