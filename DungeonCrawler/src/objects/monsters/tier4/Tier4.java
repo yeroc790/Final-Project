@@ -23,7 +23,7 @@ public class Tier4 extends Monster{
     
     public static Object getRandomMonster(int x, int y){
         String path = "objects.monsters.tier4.";
-        String monsterNames[] = {path+"EarthElemental", path+"FireElemental", path+"IceElental"};
+        String monsterNames[] = {path+"EarthElemental", path+"FireElemental", path+"IceElemental"};
         Random r = new Random();
         int low = 0;
         int high = monsterNames.length;
